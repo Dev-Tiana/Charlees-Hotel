@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Remix Remix Charlees Hotel \u0026 Suites",
+  "description": "Official hospitality website, direct reservation engine, and hotel operations management platform for Charlees Hotel \u0026 Suites in Abraka, Delta State, Nigeria.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

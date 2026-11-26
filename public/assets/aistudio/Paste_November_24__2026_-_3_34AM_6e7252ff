@@ -1,0 +1,1113 @@
+# MASTER PROJECT PROMPT: CHARLEES HOTEL & SUITES WEBSITE AND MANAGEMENT SYSTEM
+
+## 1. YOUR ROLE AND MISSION
+
+Act as a senior full stack software engineer, hospitality technology architect, website strategist, editorial creative director, UI/UX designer, SEO specialist, AI search optimization consultant, conversion optimization specialist, accessibility consultant and database architect.
+
+Your responsibility is to research, design, build, test and optimize a complete hotel website and hotel management system for **Charlees Hotel & Suites, Abraka, Delta State, Nigeria.**
+
+This is a completely new project.
+
+Do not reuse the previous Charlees website implementation, its design, layouts, components, styling or outdated architectural decisions.
+
+Build a fresh application with a distinctive visual identity, modern architecture, reliable booking functionality and a comprehensive hotel management platform.
+
+The finished website must be visually exceptional, technically reliable, discoverable through search engines, accessible, responsive and designed to convert visitors into paying guests.
+
+Do not sacrifice functionality, performance, accessibility, security or search engine visibility for visual appearance.
+
+---
+
+## 2. PROJECT REFERENCES AND HOW TO USE THEM
+
+There are three important references.
+
+### A. PRIMARY PUBLIC WEBSITE REFERENCE: HOLSTON HOUSE NASHVILLE
+
+https://www.hyatt.com/unbound-collection/en-US/bnaub-holston-house-nashville
+
+This is the primary reference for the public website's storytelling, editorial presentation, hospitality positioning and overall visitor experience.
+
+Study the website carefully, including its accommodation and dining pages.
+
+Research:
+
+1. How the hotel introduces its identity.
+2. How its architecture and location contribute to its story.
+3. How accommodation is presented.
+4. How individual facilities receive attention.
+5. How photography supports the narrative.
+6. How the website communicates a sense of place.
+7. How content flows naturally between different experiences.
+8. How booking opportunities are introduced without making every section feel like an advertisement.
+9. How typography, imagery, spacing and page composition work together.
+10. How the website maintains consistency across its pages.
+
+Use these principles to create an original Charlees Hotel experience.
+
+Do not copy its branding, wording, photographs, layouts or identity.
+
+The objective is to learn from its storytelling and presentation approach, not reproduce its website.
+
+### B. MANAGEMENT SYSTEM REFERENCE: SOUTHSIDE HOTEL
+
+https://southside.ai.studio/
+
+IMPORTANT: SouthSide Hotel is a reference for the MANAGEMENT SYSTEM ONLY.
+
+Study its operational functionality, dashboard organization, navigation and hotel management workflows.
+
+Pay particular attention to:
+
+1. Dashboard overview.
+2. Reservation management.
+3. Physical room inventory.
+4. Housekeeping queue.
+5. Maintenance management.
+6. Room blocking.
+7. Payments and financial records.
+8. Rates and room configuration.
+9. Media management.
+10. Staff management.
+11. Settings.
+12. Audit logs.
+13. Operational reporting.
+
+Use SouthSide as the functional and operational reference for building Charlees Hotel's management platform.
+
+You may improve its workflows, information architecture and usability.
+
+Do not copy the SouthSide public website, visual identity, hotel content, prices, photographs or branding.
+
+The Charlees public website must have its own completely different design.
+
+### C. ADDITIONAL FUNCTIONAL REFERENCE: ESE JONES HOTEL
+
+https://ese-jones-hotel-app.vercel.app/
+
+Use this as an additional reference when examining hotel booking workflows and management functionality.
+
+Do not copy its public website design or branding.
+
+---
+
+## 3. CHARLEES HOTEL BRAND IDENTITY
+
+Use the official Charlees Hotel & Suites logo supplied as a project asset.
+
+Inspect the actual logo and extract its brand colours.
+
+Do not approximate the colours without examining the supplied logo.
+
+The logo features gold architectural lettering and a distinctive monogram against a dark background.
+
+The chosen visual direction is:
+
+**EDITORIAL LUXURY**
+
+However, the actual architecture of Charlees Hotel must strongly influence the visual identity.
+
+### Important architectural information
+
+Charlees Hotel is a white painted building.
+
+Its actual white architecture must be a significant part of the website's visual presentation.
+
+Use authentic exterior photographs to showcase the building.
+
+The website must balance:
+
+- Warm white and ivory surfaces.
+- Deep black sections for contrast.
+- Gold accents sampled from the official logo.
+- Champagne tones where appropriate.
+- Authentic architectural photography.
+
+Do not make the entire website dark simply because the logo uses a black background.
+
+The design should complement the hotel's white exterior while retaining the sophistication of its black and gold branding.
+
+### Design characteristics
+
+1. Elegant serif display typography.
+2. Clean contemporary sans serif supporting typography.
+3. Beautiful editorial layouts.
+4. Strong photographic compositions.
+5. Asymmetrical page sections where appropriate.
+6. Generous whitespace.
+7. Refined navigation.
+8. Sophisticated booking interfaces.
+9. Thoughtful transitions.
+10. Carefully selected visual details.
+11. Consistent design language across all public pages.
+12. A modern, polished experience on mobile and desktop.
+
+Do not create a generic hotel website template.
+
+Do not reproduce the previous Charlees, SouthSide or Ese Jones public website interfaces.
+
+Do not make every section a conventional collection of rounded cards.
+
+Avoid excessive gold, gradients, glass effects, decorative borders and unnecessary visual effects.
+
+Gold should be an accent, not the dominant colour of every section.
+
+The result should look independently art directed and designed specifically for Charlees Hotel.
+
+---
+
+## 4. ANIMATION AND INTERACTION
+
+Use Framer Motion throughout the public website where it improves the experience.
+
+Implement polished and intentional animations such as:
+
+1. Smooth page transitions.
+2. Scroll based image reveals.
+3. Subtle section entrance animations.
+4. Elegant navigation transitions.
+5. Room gallery transitions.
+6. Booking progress animations.
+7. Refined hover interactions.
+8. Menu transitions.
+9. Modal transitions.
+10. Loading, confirmation and success feedback.
+11. Subtle text entrance effects.
+12. Smooth transitions between page sections.
+
+Animations must feel sophisticated, not distracting.
+
+Avoid excessive parallax, constant movement and unnecessary animation.
+
+Respect reduced motion preferences.
+
+Keep animations lightweight and optimize them for mobile devices.
+
+The management dashboard should use restrained functional animation rather than cinematic effects.
+
+Never allow animations to delay access to important content, navigation or booking functionality.
+
+---
+
+## 5. VERIFIED HOTEL INFORMATION
+
+Business name: Charlees Hotel & Suites.
+
+Location:
+
+No. 2 Lawson Obi Street, behind O2 Arena, before Benin Junction, Abraka, Delta State, Nigeria.
+
+Confirmed room categories and nightly rates:
+
+| Room category | Rate per night |
+| Standard Room | ₦60,000 |
+| Twin Room | ₦70,000 |
+| Deluxe Room | ₦70,000 |
+| Luxury Room | ₦80,000 |
+
+Confirmed hotel facilities:
+
+1. Swimming pool.
+2. Rooftop.
+
+These are facilities belonging to Charlees Hotel and must be presented as such.
+
+Research the hotel and its surroundings where reliable information is available.
+
+Do not invent:
+
+- Room amenities.
+- Room dimensions.
+- Bed configurations.
+- Guest capacity.
+- Operating hours.
+- Facility availability.
+- Awards.
+- Testimonials.
+- Customer reviews.
+- Partnerships.
+- Distances or travel times.
+- Hotel policies.
+- Other business information.
+
+Where information is unavailable, leave the appropriate content configurable through the management dashboard.
+
+Do not use room information, prices or facilities belonging to SouthSide Hotel or Ese Jones Hotel.
+
+Clearly distinguish verified information from information that requires confirmation.
+
+---
+
+## 6. RESEARCH AND HOTEL STORYTELLING
+
+This is one of the most important requirements.
+
+Develop original, well researched hospitality storytelling for Charlees Hotel.
+
+The writing must be:
+
+- Natural.
+- Concise.
+- Descriptive.
+- Human.
+- Convincing.
+- Appropriate for a modern hotel brand.
+- Based on actual hotel information.
+
+Use the storytelling principles studied from Holston House Nashville.
+
+Develop a meaningful narrative around the real Charlees property, its white architecture, rooms, swimming pool, rooftop and location in Abraka.
+
+Do not merely list facilities. Present them in a way that helps prospective guests understand what the hotel offers.
+
+Research relevant information about Abraka and its surroundings.
+
+External attractions should be presented as optional experiences guests may enjoy during their stay.
+
+Never present independent external attractions as facilities owned by Charlees Hotel.
+
+The hotel's own swimming pool and rooftop must receive clear attention.
+
+### STRICT WEBSITE WRITING RULES
+
+1. Never use hyphens, en dashes or em dashes anywhere in public website copy.
+2. Avoid generic AI generated hotel descriptions.
+3. Avoid exaggerated luxury claims.
+4. Avoid repetitive adjectives.
+5. Avoid unnecessary introductory paragraphs.
+6. Avoid repetitive calls to action.
+7. Do not write long paragraphs simply to fill sections.
+8. Avoid phrases such as sanctuary, unforgettable memories, world class hospitality and elevated experiences unless genuinely justified.
+9. Never create fake testimonials or customer experiences.
+10. Never display internal development notes to website visitors.
+11. Do not write content solely to manipulate search rankings.
+12. Give every page a clear content purpose.
+
+Use meaningful headings, short paragraphs and carefully selected descriptions.
+
+The finished content should feel like the work of an experienced hospitality brand copywriter.
+
+The no dash requirement applies to public website copy. It does not prohibit technical syntax, code, database names or developer documentation.
+
+---
+
+## 7. PUBLIC WEBSITE ARCHITECTURE
+
+Create a complete website with the following pages.
+
+### Homepage
+
+The homepage must introduce Charlees Hotel through strong editorial storytelling and authentic photography.
+
+Include:
+
+1. Refined navigation.
+2. Prominent hotel logo.
+3. Large photographic hero section.
+4. Compelling and concise headline.
+5. Direct reservation action.
+6. Booking availability interface.
+7. Introduction to the hotel.
+8. Accommodation preview.
+9. Swimming pool presentation.
+10. Rooftop presentation.
+11. Dining section if verified.
+12. Explore Abraka section.
+13. Location and contact information.
+14. Refined footer.
+
+The homepage should have a strong visual identity and a natural content flow.
+
+Do not overcrowd it with unnecessary sections.
+
+### Accommodation
+
+Present all four confirmed room categories.
+
+Each room category should include:
+
+1. Appropriate authentic photography.
+2. Room name.
+3. Confirmed nightly rate.
+4. Verified room information.
+5. Availability.
+6. Room details link.
+7. Booking action.
+
+### Individual room pages
+
+Create dedicated detail pages for each room category.
+
+Allow visitors to inspect:
+
+- Room photographs.
+- Verified amenities.
+- Room descriptions.
+- Pricing.
+- Availability.
+- Booking options.
+
+Do not display invented amenities.
+
+### Facilities
+
+Give the hotel's own facilities meaningful presentation.
+
+The swimming pool and rooftop must be clearly represented as Charlees Hotel facilities.
+
+### Explore Abraka
+
+Research relevant attractions, activities and places around Abraka.
+
+Present them as optional experiences guests may enjoy during their visit.
+
+Keep external attractions separate from hotel facilities.
+
+### Additional pages
+
+Include:
+
+1. About.
+2. Contact.
+3. Gallery.
+4. Dining, subject to verified information.
+5. Frequently asked questions.
+6. Booking.
+7. Booking confirmation.
+8. Guest booking management.
+9. Privacy policy.
+10. Terms and conditions.
+11. Cancellation and refund policy.
+
+Create an appropriate sitemap and internal linking structure.
+
+---
+
+## 8. COMPLETE HOTEL BOOKING ENGINE
+
+Build a fully functional hotel reservation system, not a demonstration form.
+
+The system must support:
+
+1. Room availability checking.
+2. Check in dates.
+3. Check out dates.
+4. Guest information.
+5. Room selection.
+6. Number of guests.
+7. Accurate price calculation.
+8. Booking reference generation.
+9. Payment integration.
+10. Reservation confirmation.
+11. Booking history.
+12. Cancellation functionality.
+13. Refund tracking.
+14. Email notifications.
+15. Appropriate booking status notifications.
+
+Availability must be calculated from actual physical room inventory.
+
+Prevent double bookings using reliable database transactions and server side validation.
+
+The booking system must account for existing reservations, room maintenance blocks and other approved inventory restrictions.
+
+The server must calculate the final booking price using trusted database information.
+
+Never trust prices or availability submitted by the browser.
+
+Room inventory and reservation records must remain consistent.
+
+Guests must be able to access their reservations and see their current booking status.
+
+---
+
+## 9. BOOKING CANCELLATION AND REFUND SYSTEM
+
+Implement the following cancellation policy.
+
+### Advance bookings
+
+Guests may cancel their reservations up to one day before their scheduled check in date.
+
+Implement this as a clear, consistent deadline using the hotel's local timezone.
+
+### Same day bookings
+
+Guests may cancel a same day reservation within one hour after the reservation was created.
+
+Calculate eligibility using the actual booking creation timestamp.
+
+### Cancellation eligibility
+
+The system must:
+
+1. Calculate cancellation eligibility automatically.
+2. Use the hotel's local timezone.
+3. Display the cancellation deadline clearly.
+4. Allow eligible guests to initiate cancellation.
+5. Record the cancellation reason.
+6. Update reservation status correctly.
+7. Release room inventory when appropriate.
+8. Record the cancellation timestamp.
+9. Notify relevant management staff.
+10. Maintain a complete audit trail.
+
+Cancellation eligibility must be validated on the server.
+
+Do not rely on browser time or a client side countdown to enforce the policy.
+
+### Refund management
+
+Create a complete refund management workflow.
+
+Include:
+
+1. Refund eligibility.
+2. Refund amount.
+3. Original payment reference.
+4. Refund request status.
+5. Refund processing status.
+6. Refund transaction reference.
+7. Refund completion date.
+8. Management approval where applicable.
+9. Refund failure handling.
+10. Refund history.
+
+Support the actual refund capabilities of the selected payment provider.
+
+Never mark a refund successful simply because a cancellation was submitted.
+
+Verify the payment provider's transaction response.
+
+Make refund processing idempotent to prevent duplicate refunds.
+
+Allow authorized management to review, approve where necessary, process and track refunds.
+
+The cancellation and refund policy must be configurable through management settings.
+
+Do not silently change the cancellation policy.
+
+### Business decisions requiring confirmation
+
+The following have not yet been confirmed:
+
+- Whether eligible cancellations receive full or partial refunds.
+- How long refunds should take.
+- Whether management can approve exceptions outside the normal cancellation window.
+
+Do not invent these rules.
+
+Design the system to support these settings and clearly identify the decisions that require management confirmation.
+
+---
+
+## 10. HOTEL MANAGEMENT SYSTEM
+
+Build a comprehensive management platform using the operational functionality of SouthSide Hotel as the reference.
+
+The management platform must be robust, organized, responsive and suitable for actual day to day hotel operations.
+
+It should have a distinct professional interface. It does not need to imitate the public website's editorial luxury presentation.
+
+### Dashboard overview
+
+Display real operational information, including:
+
+1. Today's reservations.
+2. Current occupancy.
+3. Available rooms.
+4. Upcoming check ins.
+5. Upcoming check outs.
+6. Pending payments.
+7. Cancellation requests.
+8. Refund requests.
+9. Housekeeping status.
+10. Maintenance alerts.
+
+All figures must come from actual database records.
+
+Do not display fabricated statistics or placeholder business activity as real information.
+
+### Reservation management
+
+Management should be able to:
+
+1. View reservations.
+2. Create reservations.
+3. Edit permitted reservation details.
+4. Confirm bookings.
+5. Cancel reservations.
+6. View payment records.
+7. View guest information.
+8. Search and filter reservations.
+9. View reservation history.
+10. Track check ins and check outs.
+11. Assign rooms.
+12. View reservation status.
+
+### Room inventory
+
+Include:
+
+1. Room categories.
+2. Individual physical rooms.
+3. Room numbers.
+4. Room status.
+5. Room availability.
+6. Room maintenance blocks.
+7. Room assignment.
+8. Housekeeping status.
+
+Room categories and individual physical rooms must be managed separately.
+
+### Housekeeping
+
+Include:
+
+1. Cleaning queue.
+2. Room cleaning status.
+3. Staff assignment.
+4. Cleaning completion.
+5. Inspection status.
+6. Housekeeping history.
+
+### Maintenance
+
+Allow authorized management to:
+
+- Record maintenance issues.
+- Assign responsible staff.
+- Block rooms when necessary.
+- Track maintenance status.
+- Record resolution details.
+- Review maintenance history.
+
+### Payments and financial records
+
+Include:
+
+1. Payment records.
+2. Payment methods.
+3. Cash payments.
+4. Bank transfers.
+5. Online payments.
+6. Outstanding balances.
+7. Payment confirmations.
+8. Refund records.
+9. Financial summaries.
+10. Transaction history.
+
+Never automatically treat a bank transfer as confirmed without appropriate verification.
+
+Cash payments must be supported.
+
+### Refund management
+
+Create a dedicated interface for reviewing, approving where required, processing and tracking refunds.
+
+Management should be able to view the original payment, cancellation details, refund eligibility, amount, processing status and transaction reference.
+
+### Staff and access management
+
+Implement role based permissions.
+
+Support roles such as:
+
+1. Owner.
+2. Administrator.
+3. Manager.
+4. Receptionist.
+5. Accountant.
+6. Housekeeping staff.
+7. Other configurable roles.
+
+Restrict sensitive financial and administrative operations according to permissions.
+
+### Media management
+
+Allow authorized management to upload, organize, update and manage hotel photographs and videos.
+
+### Audit logs
+
+Record important management actions, including:
+
+- Reservation changes.
+- Payment changes.
+- Refund processing.
+- Room changes.
+- Price changes.
+- Staff permission changes.
+- System setting changes.
+
+Record the responsible user, action, date and relevant details.
+
+Audit logs must not be editable by ordinary staff.
+
+### Settings
+
+Allow authorized management to configure:
+
+1. Hotel information.
+2. Room categories.
+3. Individual rooms.
+4. Room prices.
+5. Booking rules.
+6. Cancellation policies.
+7. Refund settings.
+8. Payment settings.
+9. Notification preferences.
+10. Staff access.
+11. Website content.
+12. Gallery media.
+13. Other operational settings.
+
+---
+
+## 11. DATABASE AND TECHNICAL ARCHITECTURE
+
+Use a clean and maintainable application architecture.
+
+### Required technology stack
+
+Frontend and application:
+
+- Next.js.
+- TypeScript.
+- React.
+- Tailwind CSS.
+- Framer Motion.
+- Lucide icons.
+
+Backend:
+
+- Supabase PostgreSQL.
+- Supabase Authentication.
+- Supabase Storage.
+- Supabase Realtime where appropriate.
+
+Hosting:
+
+- Vercel.
+
+Use the separate Supabase account and project created specifically for Charlees Hotel.
+
+Do not use Cloud SQL.
+
+Do not use Firebase Authentication.
+
+Do not use Drizzle as a parallel database architecture.
+
+Supabase must be the authoritative database.
+
+Do not create or delete external resources without authorization.
+
+### Database design
+
+Create a proper relational database schema covering:
+
+1. Users.
+2. Staff.
+3. Roles.
+4. Permissions.
+5. Guests.
+6. Room categories.
+7. Physical rooms.
+8. Reservations.
+9. Reservation guests.
+10. Payments.
+11. Refunds.
+12. Cancellations.
+13. Housekeeping.
+14. Maintenance.
+15. Media.
+16. Notifications.
+17. Audit logs.
+18. Hotel settings.
+
+Create appropriate relationships, constraints, indexes, migrations and database functions where necessary.
+
+Implement Row Level Security correctly.
+
+Never expose the Supabase service role key to the browser.
+
+Never trust client submitted prices, booking eligibility, payment status or refund amounts.
+
+Validate sensitive operations on the server.
+
+Use secure environment variables.
+
+Do not hardcode credentials.
+
+Do not create a second database architecture alongside Supabase.
+
+### Environment configuration
+
+Prepare the application for the new Supabase project's credentials.
+
+Use appropriate environment variables for the Supabase project URL, publishable key and any required server only secret keys.
+
+Clearly document the environment variables required for local development and Vercel deployment.
+
+Never ask the user to paste secret keys into public code or expose them in frontend files.
+
+---
+
+## 12. GOOGLE DRIVE MEDIA WORKFLOW
+
+The hotel's actual photographs and videos will be supplied through a dedicated Google Drive folder.
+
+Use Google Drive as the source of authentic hotel media if the integration is available and authorized.
+
+If direct folder access is unavailable, explain the limitation and allow individual image and video uploads.
+
+Do not pretend to have accessed files that are unavailable.
+
+Do not replace authentic hotel photographs with generated hotel images.
+
+For every supplied photograph:
+
+1. Inspect its actual contents.
+2. Identify the appropriate website section.
+3. Optimize its dimensions and file size.
+4. Preserve visual quality.
+5. Create appropriate responsive versions.
+6. Write meaningful alternative text.
+7. Integrate it into the correct section.
+
+For videos:
+
+- Optimize compression and playback.
+- Use suitable formats.
+- Implement lazy loading.
+- Avoid unnecessary autoplay.
+- Avoid slowing down the homepage.
+- Use clean original or authorized video files.
+- Do not display TikTok watermarks, usernames or interface elements.
+
+Do not crop images in ways that remove important architectural or room details.
+
+Do not invent photographs of rooms or facilities.
+
+If media is supplied one file at a time, inspect each file and integrate it into the correct location without confusing it with other hotel photographs.
+
+---
+
+## 13. PERFORMANCE, SECURITY AND ACCESSIBILITY
+
+The website must be fast, reliable and secure.
+
+Implement:
+
+1. Optimized images.
+2. Responsive image delivery.
+3. Lazy loading below the fold.
+4. Appropriate video loading strategies.
+5. Server Components where appropriate.
+6. Minimal unnecessary client side JavaScript.
+7. Efficient database queries.
+8. Appropriate caching.
+9. Secure authentication.
+10. Proper authorization.
+11. Accessible forms.
+12. Keyboard navigation.
+13. Accessible colour contrast.
+14. Clear error messages.
+15. Secure payment handling.
+16. Responsive layouts.
+17. Appropriate loading states.
+18. Error boundaries.
+19. Protection against unauthorized operations.
+
+Use Framer Motion efficiently.
+
+Do not sacrifice performance to achieve visual effects.
+
+Test performance on mobile and desktop.
+
+---
+
+## 14. SEO AND AI SEARCH READINESS
+
+Apply the complete 11 phase website foundation provided with this project.
+
+### Research
+
+Investigate:
+
+- Hotel accommodation search intent.
+- Hotel searches around Abraka.
+- Customer questions.
+- Commercial search opportunities.
+- Relevant competitors.
+- Search engine results.
+- Relevant local search opportunities.
+
+Do not invent search volumes or keyword difficulty scores.
+
+### Technical SEO
+
+Implement:
+
+1. Unique page titles.
+2. Meta descriptions.
+3. Descriptive URLs.
+4. Canonical URLs.
+5. XML sitemap.
+6. Robots.txt.
+7. Correct indexing controls.
+8. Appropriate structured data.
+9. Open Graph metadata.
+10. Internal linking.
+11. Image alternative text.
+12. Relevant FAQ content.
+13. Custom 404 page.
+14. HTTPS compatibility.
+15. Search engine accessible content.
+
+Use accurate Hotel, LodgingBusiness and other relevant structured data where appropriate.
+
+Structured data must match visible and verified information.
+
+### AI search readiness
+
+Make information clear, factual, consistent and easy for search systems to understand.
+
+Use descriptive headings, direct answers, accurate hotel details, relevant questions and original useful content.
+
+Do not promise guaranteed inclusion in AI generated answers.
+
+Do not use hidden text, fabricated expertise or keyword manipulation.
+
+---
+
+## 15. ANALYTICS AND CONVERSION TRACKING
+
+Prepare the website for:
+
+1. Google Search Console.
+2. Google Analytics.
+3. Booking conversion tracking.
+4. Contact form tracking.
+5. Click to call tracking.
+6. WhatsApp click tracking.
+7. Relevant booking funnel events.
+
+Respect privacy requirements and obtain required consent.
+
+Do not claim analytics is operational until it has been configured and tested.
+
+---
+
+## 16. DEVELOPMENT PROCESS
+
+Work in clearly defined phases.
+
+Do not generate the entire application in one unstructured operation.
+
+Do not stop after writing a plan when the project can proceed with the available information.
+
+### PHASE 1: RESEARCH AND ARCHITECTURE
+
+Research all three references.
+
+Study Holston House for public website storytelling and presentation.
+
+Study SouthSide for management system functionality only.
+
+Study Ese Jones for additional booking and operational functionality.
+
+Research Charlees Hotel and its surroundings using available reliable sources.
+
+Inspect the supplied logo.
+
+Establish the design system.
+
+Prepare:
+
+- Business research findings.
+- Sitemap.
+- Page architecture.
+- Customer journey.
+- Booking workflow.
+- Cancellation workflow.
+- Refund workflow.
+- Management dashboard architecture.
+- Database schema.
+- Technical architecture.
+- SEO strategy.
+
+Identify information requiring confirmation.
+
+### PHASE 2: PROJECT FOUNDATION
+
+Create the clean Next.js and TypeScript application.
+
+Configure dependencies, Supabase integration, environment variables, application routing and database architecture.
+
+Prepare the project for Vercel deployment.
+
+### PHASE 3: VISUAL DESIGN SYSTEM
+
+Implement the complete editorial luxury design system.
+
+Use the supplied logo and sampled colours.
+
+Reflect the actual white architecture of Charlees.
+
+Create reusable typography, spacing, navigation, buttons, layouts and animation systems.
+
+### PHASE 4: PUBLIC WEBSITE
+
+Build the homepage, accommodation pages, room details, facilities, gallery, about, contact, dining where verified, Explore Abraka and other required pages.
+
+### PHASE 5: BOOKING ENGINE
+
+Implement availability, reservations, pricing, payment workflows, confirmation, guest booking management, cancellations and refunds.
+
+### PHASE 6: MANAGEMENT PLATFORM
+
+Build the management dashboard using SouthSide as the functional reference.
+
+Implement the actual hotel operational modules.
+
+### PHASE 7: SECURITY AND INTEGRATIONS
+
+Implement authentication, roles, permissions, database policies, payment verification, notifications, audit logs and storage.
+
+### PHASE 8: TESTING AND OPTIMIZATION
+
+Test functionality, security, performance, SEO, accessibility, responsive layouts and search engine accessibility.
+
+Fix identified issues rather than simply reporting them.
+
+---
+
+## 17. THE COMPLETE 11 PHASE WEBSITE FOUNDATION
+
+The following requirements govern the entire project.
+
+### Phase 1: Business research
+
+Establish business information, offerings, target customers, customer problems, location, competitors, conversion goals, contact details and technical requirements.
+
+Never fabricate business information.
+
+### Phase 2: SEO and search intent
+
+Identify primary, secondary, commercial, informational and local keywords.
+
+Map keyword groups to relevant pages.
+
+Identify customer questions and competitor content gaps.
+
+### Phase 3: Website architecture
+
+Develop a logical sitemap, page purpose, customer journey and internal linking plan.
+
+### Phase 4: Conversion strategy
+
+Design clear booking actions, contact methods, room information, pricing, trust signals, FAQs and appropriate forms.
+
+Never create fake urgency, testimonials or misleading claims.
+
+### Phase 5: Visual design and UX
+
+Use mobile first design, accessible colours, clear typography, intuitive navigation, properly labelled forms, keyboard accessibility and appropriate loading and error states.
+
+### Phase 6: Technical SEO
+
+Implement crawlable content, metadata, canonical URLs, sitemap, robots.txt, structured data, redirects, optimized images, HTTPS and mobile usability.
+
+### Phase 7: AI search readiness
+
+Make the website's information factual, consistent, clear and easy to understand.
+
+### Phase 8: Content development
+
+Write original useful content based on actual hotel information and customer needs.
+
+Avoid filler and unsupported claims.
+
+### Phase 9: Analytics
+
+Prepare Search Console, Analytics and conversion tracking.
+
+### Phase 10: Testing and quality assurance
+
+Test navigation, booking forms, payment workflows, cancellations, refunds, mobile layouts, metadata, structured data, broken links, accessibility, performance and analytics.
+
+### Phase 11: Final deliverables
+
+Provide:
+
+1. Completed website.
+2. Sitemap.
+3. Keyword to page mapping.
+4. SEO titles and meta descriptions.
+5. Conversion strategy.
+6. Technical SEO checklist.
+7. Performance and accessibility test results.
+8. Analytics implementation notes.
+9. Remaining issues and recommended fixes.
+10. A 90 day SEO improvement plan.
+
+Clearly distinguish implemented, tested and recommended features.
+
+---
+
+## 18. IMPORTANT DEVELOPMENT RULES
+
+1. Do not reuse the previous Charlees website implementation or design.
+2. Do not copy the SouthSide public website.
+3. Use SouthSide as the management system reference only.
+4. Use Holston House as the primary public website storytelling reference.
+5. Use Ese Jones as an additional functional reference.
+6. Use the supplied Charlees logo to establish the brand identity.
+7. Reflect the hotel's actual white painted architecture.
+8. Use authentic hotel photographs and videos.
+9. Never invent hotel information.
+10. Never use hyphens, en dashes or em dashes in public website copy.
+11. Do not produce generic AI hotel content.
+12. Do not create fake testimonials.
+13. Do not expose sensitive credentials.
+14. Do not create or delete external resources without authorization.
+15. Do not sacrifice functionality for appearance.
+16. Do not make destructive database changes without explicit approval.
+17. Keep the application maintainable and production ready.
+18. Report what has actually been implemented and tested.
+19. Never claim a feature works without testing it.
+20. Never silently change the approved cancellation or refund policy.
+
+When business information or a decision is missing, identify it instead of inventing an answer.
+
+---
+
+## 19. FINAL EXPECTATION
+
+Deliver a distinctive editorial luxury hotel website for Charlees Hotel & Suites, supported by a robust and fully functional hotel management system.
+
+The public website must reflect the actual hotel, its white architecture, authentic photography, gold and black branding, accommodation and facilities.
+
+It must use original hospitality storytelling, sophisticated visual design, meaningful Framer Motion animations and a seamless reservation experience.
+
+The management system must support actual hotel operations, reservation management, physical room inventory, housekeeping, maintenance, payments, refunds, staff permissions, financial oversight and auditability.
+
+The entire application must be secure, responsive, accessible, fast, search ready and maintainable.
+
+Do not merely generate an attractive frontend or a dashboard demonstration.
+
+Build the actual application with working database operations, secure server side validation and tested workflows.
+
+### BEGIN NOW
+
+Start with Phase 1.
+
+Research the references, investigate Charlees Hotel using available reliable information, inspect the uploaded logo, establish the architecture and design system, and then proceed through the development phases.
+
+Do not wait for another general approval after presenting the architecture. Continue implementing the project in structured stages.
+
+Where access to Google Drive, Supabase, payment providers or other external services requires user authorization or credentials, explain exactly what is needed and continue with the parts that can be implemented safely.
+
+At each stage, report what has been completed, what has been tested, what remains and what requires my input.
+
+The objective is a complete, production ready Charlees Hotel & Suites website and hotel management platform, not just a design concept.
