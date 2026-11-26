@@ -28,11 +28,22 @@ export default async function HomePage() {
     HotelDataService.checkAvailability(today, tomorrow),
   ]);
 
+  const heroVideoAsset =
+    media.find((m) => m.section_key === 'hero' && m.media_type === 'video') ?? null;
+  const heroVideoSrc =
+    heroVideoAsset?.public_url || '/media/hero/charlees-pool-courtyard-hero.mp4';
+  const heroPosterSrc =
+    heroVideoAsset?.poster_url || '/media/hero/charlees-pool-courtyard-hero-poster.jpg';
+
   const exteriorAsset = media.find((m) => m.section_key === 'exterior') ?? null;
   const poolAssets = media.filter((m) => m.section_key === 'pool');
   const rooftopAsset = media.find((m) => m.section_key === 'rooftop') ?? null;
   const diningAsset = media.find((m) => m.section_key === 'dining') ?? null;
-  const abrakaAssets = media.filter((m) => m.section_key === 'abraka');
+  const riverEthiopeAssets = media.filter(
+    (m) => m.section_key === 'exp_river_ethiope' || m.section_key === 'abraka'
+  );
+  const abrakaMarketAssets = media.filter((m) => m.section_key === 'exp_abraka_market');
+  const abrakaTopAssets = media.filter((m) => m.section_key === 'exp_abraka_top');
 
   const poolFacility = facilities.find((f) => f.slug === 'swimming-pool');
   const rooftopFacility = facilities.find((f) => f.slug === 'rooftop-lounge');
@@ -43,29 +54,26 @@ export default async function HomePage() {
   return (
     <PublicShell>
       <main>
-        {/* UNIFIED HERO SECTION WITH FULL-BLEED BACKGROUND VIDEO */}
+        {/* UNIFIED HERO SECTION WITH FULL-BLEED BRIGHT COURTYARD VIDEO */}
         <section className="relative overflow-hidden bg-[#0D0D0E] text-[#FAF9F6]">
-          <HeroBackgroundVideo
-            src="/media/hero/charlees-hero.mp4"
-            poster="/media/hero/charlees-hero-poster.jpg"
-          />
+          <HeroBackgroundVideo src={heroVideoSrc} poster={heroPosterSrc} />
 
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-8 pt-16 sm:pt-24 lg:pt-28 pb-16 sm:pb-20 min-h-[540px] sm:min-h-[600px] lg:min-h-[650px] flex flex-col justify-end">
             <div className="max-w-3xl space-y-6">
               <HeroEntrance delay={0}>
-                <p className="text-xs uppercase tracking-[0.22em] text-[#D6B46A] font-medium">
+                <p className="text-xs uppercase tracking-[0.22em] text-[#F3D896] font-semibold [text-shadow:0_2px_12px_rgba(0,0,0,0.85),0_1px_3px_rgba(0,0,0,0.8)]">
                   Abraka · Delta State · Nigeria
                 </p>
               </HeroEntrance>
 
               <HeroEntrance delay={0.08}>
-                <h1 className="font-display text-[clamp(2.35rem,4.4vw,4.25rem)] leading-[1.06] font-normal tracking-tight text-[#FAF9F6] text-balance">
+                <h1 className="font-display text-[clamp(2.35rem,4.4vw,4.25rem)] leading-[1.06] font-normal tracking-tight text-[#FAF9F6] text-balance [text-shadow:0_3px_22px_rgba(0,0,0,0.78),0_1px_5px_rgba(0,0,0,0.72)]">
                   White Architecture and Quiet Composure in Abraka
                 </h1>
               </HeroEntrance>
 
               <HeroEntrance delay={0.14}>
-                <p className="text-base sm:text-lg leading-relaxed text-[#E7E2D9] max-w-xl">
+                <p className="text-base sm:text-lg leading-relaxed text-[#FAF9F6] max-w-xl [text-shadow:0_2px_16px_rgba(0,0,0,0.82),0_1px_4px_rgba(0,0,0,0.78)]">
                   Standing in crisp white plaster along No. 2 Lawson Obi Street, Charlees Hotel &amp; Suites offers four private room tiers, an outdoor swimming pool, and a rooftop space shaped for unhurried stays.
                 </p>
               </HeroEntrance>
@@ -74,21 +82,21 @@ export default async function HomePage() {
                 <div className="flex flex-wrap items-center gap-4">
                   <Link
                     href="/book"
-                    className="inline-flex items-center gap-2.5 bg-[#D6B46A] text-[#0D0D0E] px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] whitespace-nowrap hover:bg-[#E2C581] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D6B46A]"
+                    className="inline-flex items-center gap-2.5 bg-[#D6B46A] text-[#0D0D0E] px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] whitespace-nowrap hover:bg-[#E2C581] shadow-[0_6px_22px_rgba(0,0,0,0.35)] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D6B46A]"
                   >
                     <span>Book Your Stay</span>
                     <ArrowRight className="w-4 h-4" aria-hidden="true" />
                   </Link>
                   <Link
                     href="#rooms-booking"
-                    className="inline-flex items-center gap-2 border border-[#FAF9F6]/45 bg-[#0D0D0E]/40 backdrop-blur-xs px-6 py-3.5 text-xs font-medium uppercase tracking-[0.18em] text-[#FAF9F6] whitespace-nowrap hover:border-[#D6B46A] hover:text-[#D6B46A] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D6B46A]"
+                    className="inline-flex items-center gap-2 border border-[#FAF9F6]/75 bg-[#0D0D0E]/25 backdrop-blur-[2px] px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-[#FAF9F6] [text-shadow:0_1px_8px_rgba(0,0,0,0.7)] whitespace-nowrap hover:border-[#D6B46A] hover:text-[#D6B46A] transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#D6B46A]"
                   >
                     <span>Explore Rooms</span>
                   </Link>
                 </div>
 
-                <p className="mt-6 pr-16 sm:pr-28 flex items-start gap-2 text-xs text-[#D6D0C4]">
-                  <MapPin className="w-3.5 h-3.5 mt-0.5 text-[#D6B46A] shrink-0" aria-hidden="true" />
+                <p className="mt-6 pr-16 sm:pr-28 flex items-start gap-2 text-xs text-[#FAF9F6] [text-shadow:0_2px_10px_rgba(0,0,0,0.85)]">
+                  <MapPin className="w-3.5 h-3.5 mt-0.5 text-[#F3D896] shrink-0" aria-hidden="true" />
                   <span>{settings.hotel_profile.address}</span>
                 </p>
               </HeroEntrance>
@@ -151,7 +159,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        {/* 02. ACCOMMODATION & INLINE CONNECTED ROOM BOOKING */}
+        {/* 02. ACCOMMODATION — ALL 4 ROOM CATEGORIES IMMEDIATELY VISIBLE */}
         <section id="rooms-booking" className="border-t border-[#E6E1D8] bg-[#FAF9F6]">
           <div className="mx-auto max-w-7xl px-4 sm:px-8 py-20 sm:py-28">
             <EditorialReveal className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-[#E6E1D8] mb-10">
@@ -160,7 +168,7 @@ export default async function HomePage() {
                   02. Accommodation
                 </p>
                 <h2 className="font-display text-3xl sm:text-5xl font-normal tracking-tight text-[#171614] text-balance">
-                  Select a room category to explore photographs and book directly
+                  Four room categories ready to explore and reserve directly
                 </h2>
               </div>
               <Link
@@ -182,106 +190,111 @@ export default async function HomePage() {
               onlinePaystackEnabled={onlinePaystackEnabled}
               advanceDaysRequired={settings.cancellation_policy.advanceDaysRequired}
               sameDayWindowMinutes={settings.cancellation_policy.sameDayWindowMinutes}
-              initialRoomSlug="twin-room"
+              expandAllOnMount={true}
               isDevelopmentMode={isDevelopmentMode}
             />
           </div>
         </section>
 
-        {/* 03. DEEP OBSIDIAN CONTRAST BAND: SWIMMING POOL & ROOFTOP */}
+        {/* 03. INDEPENDENT SECTION: SWIMMING POOL */}
         <section className="bg-[#0D0D0E] text-[#FAF9F6] border-t border-[#26231E]">
           <div className="mx-auto max-w-7xl px-4 sm:px-8 py-20 sm:py-28">
-            <EditorialReveal className="max-w-2xl space-y-3 mb-14">
-              <p className="text-xs uppercase tracking-[0.22em] text-[#D6B46A]">
-                03. Hotel Facilities
-              </p>
-              <h2 className="font-display text-3xl sm:text-5xl font-normal tracking-tight text-[#FAF9F6] text-balance">
-                Spaces built for quiet afternoons and open evening air
-              </h2>
-              <p className="text-sm sm:text-base text-[#B5AFA4] leading-relaxed">
-                Alongside guest accommodations, Charlees Hotel &amp; Suites features two signature on site facilities designed for unhurried moments within the property.
-              </p>
-            </EditorialReveal>
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-              {/* Swimming Pool */}
-              <EditorialReveal className="lg:col-span-6 space-y-5">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+              <EditorialReveal className="lg:col-span-7">
                 <ExperienceMediaGallery
                   title={poolFacility?.name || 'The Swimming Pool'}
                   subtitle="Facility 01 · Swimming Pool"
                   assets={poolAssets}
                   aspectClass="aspect-[4/5]"
-                  maxWidthClass="max-w-[460px] lg:mx-0"
+                  maxWidthClass="max-w-2xl lg:mx-0"
                   tone="dark"
                 />
-                <div className="space-y-2 pt-1">
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h3 className="font-display text-3xl font-normal text-[#FAF9F6]">
-                      {poolFacility?.name || 'The Swimming Pool'}
-                    </h3>
-                    {poolFacility?.operating_hours ? (
-                      <span className="text-[11px] font-mono-tabular uppercase tracking-[0.14em] text-[#D6B46A]">
-                        {poolFacility.operating_hours}
-                      </span>
-                    ) : null}
-                  </div>
-                  <p className="text-sm leading-relaxed text-[#B5AFA4]">
-                    {poolFacility?.summary ||
-                      'Set within the quiet perimeter of the hotel grounds, the swimming pool offers resident guests a calm place to cool down after daytime travel across Delta State.'}
-                  </p>
-                </div>
               </EditorialReveal>
 
-              {/* Rooftop */}
-              <EditorialReveal delay={0.1} className="lg:col-span-6 space-y-5 lg:mt-16">
-                <RooftopVideoPlayer
-                  asset={rooftopAsset}
-                  title={rooftopFacility?.name || 'The Rooftop Lounge'}
-                  tone="dark"
-                  maxWidthClass="max-w-[390px] lg:mx-0"
-                />
-                <div className="space-y-2 pt-1">
-                  <div className="flex flex-wrap items-baseline justify-between gap-2">
-                    <h3 className="font-display text-3xl font-normal text-[#FAF9F6]">
-                      {rooftopFacility?.name || 'The Rooftop Lounge'}
-                    </h3>
-                    {rooftopFacility?.operating_hours ? (
-                      <span className="text-[11px] font-mono-tabular uppercase tracking-[0.14em] text-[#D6B46A]">
-                        {rooftopFacility.operating_hours}
-                      </span>
-                    ) : null}
-                  </div>
-                  <p className="text-sm leading-relaxed text-[#B5AFA4]">
-                    {rooftopFacility?.summary ||
-                      'Elevated above Lawson Obi Street, the rooftop space looks out over Abraka as evening light settles across the town, offering fresh air and unhurried conversation.'}
+              <EditorialReveal delay={0.1} className="lg:col-span-5 space-y-5">
+                <p className="text-xs uppercase tracking-[0.22em] text-[#D6B46A]">
+                  03. Swimming Pool
+                </p>
+                <h2 className="font-display text-3xl sm:text-5xl font-normal tracking-tight text-[#FAF9F6] text-balance">
+                  {poolFacility?.name || 'The Swimming Pool'}
+                </h2>
+                {poolFacility?.operating_hours ? (
+                  <p className="text-xs font-mono-tabular uppercase tracking-[0.16em] text-[#D6B46A]">
+                    {poolFacility.operating_hours}
                   </p>
+                ) : null}
+                <p className="text-base leading-relaxed text-[#B5AFA4]">
+                  {poolFacility?.summary ||
+                    'Set within the quiet perimeter of the hotel grounds, the swimming pool offers resident guests a calm place to cool down after daytime travel across Delta State.'}
+                </p>
+                <p className="text-xs text-[#9E978B]">
+                  Complimentary poolside access for checked-in residents; towels available at front desk reception.
+                </p>
+                <div className="pt-2">
+                  <Link
+                    href="/facilities"
+                    className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-[#D6B46A] hover:text-white transition-colors"
+                  >
+                    <span>Explore Swimming Pool Details</span>
+                    <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                  </Link>
                 </div>
               </EditorialReveal>
-            </div>
-
-            <div className="mt-12 pt-8 border-t border-[#26231E] flex flex-wrap items-center justify-between gap-4">
-              <p className="text-xs text-[#9E978B]">
-                Complimentary poolside access for checked-in residents; towels available at front desk reception.
-              </p>
-              <Link
-                href="/facilities"
-                className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-[#D6B46A] hover:text-white transition-colors"
-              >
-                <span>Explore Hotel Facilities</span>
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </Link>
             </div>
           </div>
         </section>
 
-        {/* 04. CONFIGURABLE DINING & REFRESHMENTS */}
+        {/* 04. INDEPENDENT SECTION: ROOFTOP LOUNGE */}
+        <section className="bg-[#141311] text-[#FAF9F6] border-t border-[#26231E]">
+          <div className="mx-auto max-w-7xl px-4 sm:px-8 py-20 sm:py-28">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+              <EditorialReveal className="lg:col-span-5 space-y-5 order-2 lg:order-1">
+                <p className="text-xs uppercase tracking-[0.22em] text-[#D6B46A]">
+                  04. Rooftop Lounge
+                </p>
+                <h2 className="font-display text-3xl sm:text-5xl font-normal tracking-tight text-[#FAF9F6] text-balance">
+                  {rooftopFacility?.name || 'The Rooftop Lounge'}
+                </h2>
+                {rooftopFacility?.operating_hours ? (
+                  <p className="text-xs font-mono-tabular uppercase tracking-[0.16em] text-[#D6B46A]">
+                    {rooftopFacility.operating_hours}
+                  </p>
+                ) : null}
+                <p className="text-base leading-relaxed text-[#B5AFA4]">
+                  {rooftopFacility?.summary ||
+                    'Elevated above Lawson Obi Street, the rooftop space looks out over Abraka as evening light settles across the town, offering fresh air and unhurried conversation.'}
+                </p>
+                <div className="pt-2">
+                  <Link
+                    href="/facilities"
+                    className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-[#D6B46A] hover:text-white transition-colors"
+                  >
+                    <span>Explore Rooftop &amp; Facilities</span>
+                    <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                  </Link>
+                </div>
+              </EditorialReveal>
+
+              <EditorialReveal delay={0.1} className="lg:col-span-7 order-1 lg:order-2">
+                <RooftopVideoPlayer
+                  asset={rooftopAsset}
+                  title={rooftopFacility?.name || 'The Rooftop Lounge'}
+                  tone="dark"
+                  maxWidthClass="max-w-lg lg:ml-auto lg:mr-0"
+                />
+              </EditorialReveal>
+            </div>
+          </div>
+        </section>
+
+        {/* 05. CONFIGURABLE DINING & REFRESHMENTS */}
         {settings.hotel_profile.diningEnabled ? (
           <section className="border-t border-[#E6E1D8] bg-white">
             <div className="mx-auto max-w-7xl px-4 sm:px-8 py-16 sm:py-24">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                 <EditorialReveal className="lg:col-span-6 space-y-4">
                   <p className="text-xs uppercase tracking-[0.22em] text-[#8C6822]">
-                    04. Dining &amp; Refreshments
+                    05. Dining &amp; Refreshments
                   </p>
                   <h2 className="font-display text-3xl sm:text-4xl font-normal text-[#171614] text-balance">
                     Dining at Charlees Hotel &amp; Suites
@@ -313,71 +326,113 @@ export default async function HomePage() {
           </section>
         ) : null}
 
-        {/* 05. EXPLORE ABRAKA (INDEPENDENT SURROUNDING EXPERIENCES) */}
+        {/* 06. EXPERIENCES IN ABRAKA (ISOLATED SUBSECTIONS) */}
         <section className="border-t border-[#E6E1D8] bg-[#F2EFE9]">
-          <div className="mx-auto max-w-7xl px-4 sm:px-8 py-20 sm:py-28">
+          <div className="mx-auto max-w-7xl px-4 sm:px-8 py-20 sm:py-28 space-y-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
               <EditorialReveal className="lg:col-span-5 space-y-5">
                 <p className="text-xs uppercase tracking-[0.22em] text-[#8C6822]">
-                  05. Explore Abraka
+                  06. Abraka Experiences
                 </p>
                 <h2 className="font-display text-3xl sm:text-5xl font-normal tracking-tight text-[#171614] text-balance">
-                  Natural riverbanks and town life beyond the gates
+                  River Ethiope and independent destinations around Abraka
                 </h2>
                 <p className="text-base leading-relaxed text-[#4A453E]">
-                  Abraka is shaped by the clear spring waters of the Ethiope River, lush vegetation, and the academic rhythm of Delta State University. Guests staying at Charlees may visit nearby independent landmarks across town at their own pace.
+                  Abraka is shaped by the clear spring waters of River Ethiope, calm Delta greenery, and vibrant local town life in Ethiope East. Explore each independent experience page below at your own pace.
                 </p>
                 <div className="pt-2">
                   <Link
-                    href="/explore-abraka"
+                    href="/experiences"
                     className="inline-flex items-center gap-2 bg-[#0D0D0E] text-[#FAF9F6] px-6 py-3 text-xs font-medium uppercase tracking-[0.18em] hover:bg-[#26231F] transition-colors"
                   >
-                    <span>Read the Abraka Guide</span>
+                    <span>Explore All Experiences</span>
                     <ArrowRight className="w-4 h-4" aria-hidden="true" />
                   </Link>
                 </div>
               </EditorialReveal>
 
-              <EditorialReveal delay={0.1} className="lg:col-span-7 space-y-8">
+              <EditorialReveal delay={0.1} className="lg:col-span-7">
                 <ExperienceMediaGallery
                   title="River Ethiope"
                   subtitle="Ethiope East · Abraka"
-                  assets={abrakaAssets}
+                  assets={riverEthiopeAssets}
                   aspectClass="aspect-[4/5]"
-                  maxWidthClass="max-w-[460px]"
+                  maxWidthClass="max-w-2xl"
                 />
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2">
-                  <div className="border-t border-[#D8D1C5] pt-4">
-                    <h3 className="font-display text-xl text-[#171614]">Ethiope River</h3>
-                    <p className="mt-1.5 text-xs leading-relaxed text-[#5C574F]">
-                      Clear spring fed inland waterway flowing through Abraka, appreciated for riverside calm.
-                    </p>
-                  </div>
-                  <div className="border-t border-[#D8D1C5] pt-4">
-                    <h3 className="font-display text-xl text-[#171614]">McCarthy Beach</h3>
-                    <p className="mt-1.5 text-xs leading-relaxed text-[#5C574F]">
-                      Independent riverside recreation spot situated along the banks of the Ethiope River.
-                    </p>
-                  </div>
-                  <div className="border-t border-[#D8D1C5] pt-4">
-                    <h3 className="font-display text-xl text-[#171614]">Abraka Turf &amp; Country Club</h3>
-                    <p className="mt-1.5 text-xs leading-relaxed text-[#5C574F]">
-                      Independent equestrian and leisure destination set on expansive greenery in Abraka.
-                    </p>
-                  </div>
-                </div>
               </EditorialReveal>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-[#D8D1C5]">
+              <article className="bg-white border border-[#E6E1D8] p-6 flex flex-col justify-between gap-4">
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-[#8C6822]">
+                    01 · River Ethiope ({riverEthiopeAssets.length} Visuals)
+                  </p>
+                  <h3 className="mt-1 font-display text-2xl text-[#171614]">River Ethiope</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-[#5C574F]">
+                    Clear spring-fed inland waterway flowing through Abraka, Delta State — appreciated for natural pools and riverside canoe crossings.
+                  </p>
+                </div>
+                <Link
+                  href="/experiences/river-ethiope"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.16em] text-[#171614] hover:text-[#8C6822]"
+                >
+                  <span>Visit River Ethiope Page</span>
+                  <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                </Link>
+              </article>
+
+              <article className="bg-white border border-[#E6E1D8] p-6 flex flex-col justify-between gap-4">
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-[#8C6822]">
+                    02 · Abraka, Ethiope East
+                  </p>
+                  <h3 className="mt-1 font-display text-2xl text-[#171614]">Abraka Market</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-[#5C574F]">
+                    Local town market serving Abraka and Ethiope East communities in Delta State with seasonal produce and regional wares.
+                    {abrakaMarketAssets.length > 0 ? ` (${abrakaMarketAssets.length} curated visuals)` : ''}
+                  </p>
+                </div>
+                <Link
+                  href="/experiences/abraka-market"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.16em] text-[#171614] hover:text-[#8C6822]"
+                >
+                  <span>Visit Abraka Market Page</span>
+                  <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                </Link>
+              </article>
+
+              <article className="bg-white border border-[#E6E1D8] p-6 flex flex-col justify-between gap-4">
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-[#8C6822]">
+                    03 · {abrakaTopAssets.length > 0 ? 'Abraka Corridor' : 'Pending Verification'}
+                  </p>
+                  <h3 className="mt-1 font-display text-2xl text-[#171614]">Abraka Top</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-[#5C574F]">
+                    {abrakaTopAssets.length > 0
+                      ? 'Verified visual highlights from Abraka Top, Delta State.'
+                      : 'Awaiting confirmed location guidance and photography from Charlees Hotel management.'}
+                  </p>
+                </div>
+                <Link
+                  href="/experiences/abraka-top"
+                  className="inline-flex items-center gap-1.5 text-xs font-medium uppercase tracking-[0.16em] text-[#171614] hover:text-[#8C6822]"
+                >
+                  <span>Visit Abraka Top Page</span>
+                  <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                </Link>
+              </article>
             </div>
           </div>
         </section>
 
-        {/* 06. LOCATION, CONTACT & BOOKING CLARITY */}
+        {/* 07. LOCATION, CONTACT & BOOKING CLARITY */}
         <section className="border-t border-[#E6E1D8] bg-[#FAF9F6]">
           <div className="mx-auto max-w-7xl px-4 sm:px-8 py-20 sm:py-24">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
               <div className="lg:col-span-7 space-y-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-[#8C6822]">
-                  06. Location &amp; Reservations
+                  07. Location &amp; Reservations
                 </p>
                 <h2 className="font-display text-3xl sm:text-4xl font-normal text-[#171614] text-balance">
                   Arrive directly at No. 2 Lawson Obi Street

@@ -43,7 +43,7 @@ export default async function RoomsPage({
             Guest rooms designed for calm stays in Delta State
           </h1>
           <p className="text-base sm:text-lg leading-relaxed text-[#5C574F]">
-            Select any room category below to view room photographs, bed configurations, nightly rates, and reserve directly.
+            Explore all four room categories below with verified room photographs, bed configurations, and direct reservation options.
           </p>
         </div>
 
@@ -63,6 +63,7 @@ export default async function RoomsPage({
           sameDayWindowMinutes={settings.cancellation_policy.sameDayWindowMinutes}
           initialRoomSlug={sp.room || ''}
           initialOpenBooking={sp.book === '1'}
+          expandAllOnMount={!sp.room}
           isDevelopmentMode={isDevelopmentMode}
         />
       </main>

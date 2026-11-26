@@ -57,7 +57,7 @@ export default async function FacilitiesPage() {
                   subtitle="Facility 01 · Swimming Pool"
                   assets={poolAssets}
                   aspectClass="aspect-[4/5]"
-                  maxWidthClass="max-w-[460px] lg:mx-0"
+                  maxWidthClass="max-w-2xl lg:mx-0"
                 />
               </EditorialReveal>
               <EditorialReveal delay={0.1} className="lg:col-span-6 space-y-6">
@@ -170,7 +170,7 @@ export default async function FacilitiesPage() {
                   asset={rooftopAsset}
                   title={rooftop?.name || 'The Rooftop Lounge'}
                   tone="dark"
-                  maxWidthClass="max-w-[390px] lg:ml-auto lg:mr-0"
+                  maxWidthClass="max-w-lg lg:ml-auto lg:mr-0"
                 />
               </EditorialReveal>
             </div>

@@ -148,14 +148,14 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { id: 'overview', group: 'Operations', label: 'Dashboard Overview', icon: LayoutDashboard, permission: 'dashboard:view' },
+  { id: 'overview', group: 'Operations', label: 'Overview', icon: LayoutDashboard, permission: 'dashboard:view' },
   { id: 'reservations', group: 'Operations', label: 'Reservations', icon: CalendarCheck2, permission: 'reservations:view' },
-  { id: 'availability', group: 'Operations', label: 'Room Availability', icon: CalendarRange, permission: 'availability:view' },
   { id: 'rooms', group: 'Operations', label: 'Room Management', icon: BedDouble, permission: 'rooms:view' },
-  { id: 'rates', group: 'Operations', label: 'Rates & Packages', icon: BadgeDollarSign, permission: 'rates:manage' },
+  { id: 'availability', group: 'Operations', label: 'Room Availability', icon: CalendarRange, permission: 'availability:view' },
+  { id: 'rates', group: 'Operations', label: 'Rates and Packages', icon: BadgeDollarSign, permission: 'rates:manage' },
 
-  { id: 'payments', group: 'Revenue & Finance', label: 'Payments & Transactions', icon: CreditCard, permission: 'payments:view' },
-  { id: 'bank_transfers', group: 'Revenue & Finance', label: 'Bank Transfers', icon: Landmark, permission: 'payments:verify' },
+  { id: 'payments', group: 'Revenue & Finance', label: 'Payments and Transactions', icon: CreditCard, permission: 'payments:view' },
+  { id: 'bank_transfers', group: 'Revenue & Finance', label: 'Bank Transfer Confirmations', icon: Landmark, permission: 'payments:verify' },
   { id: 'cancellations', group: 'Revenue & Finance', label: 'Cancellation Requests', icon: Ban, permission: 'cancellations:view' },
   { id: 'refunds', group: 'Revenue & Finance', label: 'Refund Management', icon: RotateCcw, permission: 'refunds:view' },
 
@@ -264,7 +264,7 @@ export function AdminWorkspace({
     ? activeTab
     : visibleNav[0]?.id || 'overview';
   const currentTitle =
-    NAV_ITEMS.find((n) => n.id === resolvedTab)?.label || 'Dashboard Overview';
+    NAV_ITEMS.find((n) => n.id === resolvedTab)?.label || 'Overview';
 
   const counts = useMemo(() => {
     if (!data) return { bankTransfers: 0, cancellations: 0, chat: 0 };
@@ -332,18 +332,18 @@ export function AdminWorkspace({
 
   return (
     <div className="min-h-screen bg-[#F5F3EE] text-[#171614] font-sans flex">
-      {/* Persistent Left Vertical Sidebar (Desktop) */}
-      <aside className="hidden lg:flex w-64 shrink-0 flex-col bg-[#0D0D0E] text-[#FAF9F6] border-r border-[#26231E]">
+      {/* Persistent Left Vertical Sidebar (Tablet & Desktop) */}
+      <aside className="hidden md:flex md:sticky md:top-0 md:h-screen w-64 shrink-0 flex-col bg-[#0D0D0E] text-[#FAF9F6] border-r border-[#26231E]">
         <div className="p-5 border-b border-[#26231E] space-y-3">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-[#D6B46A] hover:text-white transition-colors"
+            className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 border border-[#D6B46A]/45 bg-[#171511] text-[11px] font-semibold uppercase tracking-[0.16em] text-[#D6B46A] hover:bg-[#D6B46A] hover:text-[#0D0D0E] transition-colors"
           >
-            <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>Back to Website</span>
+            <ArrowLeft className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+            <span>Return to Website</span>
           </Link>
           <div>
-            <p className="text-[11px] uppercase tracking-[0.2em] text-[#9E978B]">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-[#9E978B]">
               Charlees Management
             </p>
             <p className="font-display text-lg font-normal text-white mt-0.5 truncate">
@@ -413,7 +413,7 @@ export function AdminWorkspace({
             <button
               type="button"
               onClick={() => setMobileNavOpen((p) => !p)}
-              className="lg:hidden p-2 border border-[#D8D1C5] text-[#171614]"
+              className="md:hidden p-2 border border-[#D8D1C5] text-[#171614]"
               aria-label="Toggle management sidebar"
             >
               {mobileNavOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
@@ -427,36 +427,69 @@ export function AdminWorkspace({
           <div className="flex items-center gap-3 shrink-0">
             <Link
               href="/"
-              className="lg:hidden inline-flex items-center gap-1 text-xs font-medium text-[#8C6822] hover:text-[#171614] whitespace-nowrap"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 border border-[#D8D1C5] text-xs font-medium text-[#171614] hover:border-[#8C6822] hover:text-[#8C6822] whitespace-nowrap transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Website</span>
+              <span className="hidden sm:inline">Return to Website</span>
+              <span className="sm:hidden">Website</span>
             </Link>
-            <span className="hidden sm:inline text-[11px] font-mono text-[#6B6459]">
-              {storageMode === 'supabase_live' ? 'Supabase Live' : 'Local Mock Store'}
+            <span className="hidden lg:inline text-[11px] font-mono text-[#6B6459]">
+              {storageMode === 'supabase_live' ? 'Supabase Live' : 'Local Store'}
             </span>
             <button
               type="button"
               onClick={fetchSnapshot}
               className="px-3 py-1.5 text-xs border border-[#D8D1C5] bg-white hover:bg-[#FAF8F4] whitespace-nowrap"
             >
-              Refresh Data
+              Refresh
             </button>
           </div>
         </header>
 
-        {/* Mobile Drawer Sidebar */}
+        {/* Mobile Overlay Drawer Sidebar (Never pushes page content below) */}
         {mobileNavOpen ? (
-          <div className="lg:hidden bg-[#0D0D0E] text-[#FAF9F6] border-b border-[#26231E] p-4 space-y-4">
-            {renderNavGroups(() => setMobileNavOpen(false))}
-            <div className="pt-3 border-t border-[#26231E] flex items-center justify-between text-xs">
-              <Link href="/" className="text-[#D6B46A]">
-                Back to Website
-              </Link>
-              <button type="button" onClick={onLogout} className="text-red-300">
-                Sign Out
-              </button>
-            </div>
+          <div className="md:hidden fixed inset-0 z-50 flex">
+            <div
+              className="fixed inset-0 bg-[#0D0D0E]/70"
+              aria-hidden="true"
+              onClick={() => setMobileNavOpen(false)}
+            />
+            <aside className="relative z-10 w-72 max-w-[85vw] h-full bg-[#0D0D0E] text-[#FAF9F6] border-r border-[#26231E] flex flex-col overflow-hidden">
+              <div className="p-4 border-b border-[#26231E] flex items-center justify-between gap-2">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-[#9E978B]">
+                    Charlees Management
+                  </p>
+                  <p className="font-display text-base text-white truncate">{session.fullName}</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setMobileNavOpen(false)}
+                  className="p-1.5 border border-[#2E2A23] text-[#D8D1C5]"
+                  aria-label="Close navigation menu"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="p-3 border-b border-[#26231E]">
+                <Link
+                  href="/"
+                  className="w-full inline-flex items-center justify-center gap-2 px-3 py-2 border border-[#D6B46A]/45 bg-[#171511] text-[11px] font-semibold uppercase tracking-[0.16em] text-[#D6B46A]"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
+                  <span>Return to Website</span>
+                </Link>
+              </div>
+              <nav aria-label="Mobile management modules" className="flex-1 p-3 overflow-y-auto">
+                {renderNavGroups(() => setMobileNavOpen(false))}
+              </nav>
+              <div className="p-4 border-t border-[#26231E] flex items-center justify-between text-xs">
+                <span className="text-[#9E978B]">{getRoleLabel(session.role)}</span>
+                <button type="button" onClick={onLogout} className="text-red-300">
+                  Sign Out
+                </button>
+              </div>
+            </aside>
           </div>
         ) : null}
 

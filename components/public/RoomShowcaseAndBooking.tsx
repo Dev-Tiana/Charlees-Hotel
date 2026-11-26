@@ -52,6 +52,7 @@ interface RoomShowcaseAndBookingProps {
   sameDayWindowMinutes?: number;
   initialRoomSlug?: string;
   initialOpenBooking?: boolean;
+  expandAllOnMount?: boolean;
   isDevelopmentMode?: boolean;
 }
 
@@ -79,6 +80,7 @@ export function RoomShowcaseAndBooking({
   sameDayWindowMinutes = 60,
   initialRoomSlug = '',
   initialOpenBooking = false,
+  expandAllOnMount = false,
   isDevelopmentMode = false,
 }: RoomShowcaseAndBookingProps) {
   const router = useRouter();
@@ -86,11 +88,21 @@ export function RoomShowcaseAndBooking({
   const bookingSectionRef = useRef<HTMLDivElement | null>(null);
   const skipFirstFetchRef = useRef(Boolean(initialAvailability && initialAvailability.length > 0));
 
-  const [expandedSlug, setExpandedSlug] = useState<string | null>(
-    initialRoomSlug && categories.some((c) => c.slug === initialRoomSlug)
-      ? initialRoomSlug
-      : categories[0]?.slug || null
-  );
+  const [expandedBySlug, setExpandedBySlug] = useState<Record<string, boolean>>(() => {
+    const map: Record<string, boolean> = {};
+    if (expandAllOnMount) {
+      for (const cat of categories) {
+        map[cat.slug] = true;
+      }
+      return map;
+    }
+    const defaultSlug =
+      initialRoomSlug && categories.some((c) => c.slug === initialRoomSlug)
+        ? initialRoomSlug
+        : categories[0]?.slug || '';
+    if (defaultSlug) map[defaultSlug] = true;
+    return map;
+  });
   const [slideIndexBySlug, setSlideIndexBySlug] = useState<Record<string, number>>({});
   const [bookingRoomSlug, setBookingRoomSlug] = useState<string | null>(
     initialOpenBooking && initialRoomSlug ? initialRoomSlug : null
@@ -160,14 +172,14 @@ export function RoomShowcaseAndBooking({
 
   const handleToggleRoom = (slug: string) => {
     setSubmitError('');
-    if (expandedSlug === slug) {
-      setExpandedSlug(null);
+    const currentlyOpen = Boolean(expandedBySlug[slug]);
+    if (currentlyOpen) {
+      setExpandedBySlug((prev) => ({ ...prev, [slug]: false }));
       if (bookingRoomSlug === slug) {
         setBookingRoomSlug(null);
       }
     } else {
-      setExpandedSlug(slug);
-      // Close any previously open booking form on a different room so selection stays aligned
+      setExpandedBySlug((prev) => ({ ...prev, [slug]: true }));
       if (bookingRoomSlug && bookingRoomSlug !== slug) {
         setBookingRoomSlug(null);
       }
@@ -176,7 +188,7 @@ export function RoomShowcaseAndBooking({
   };
 
   const handleProceedToBook = (slug: string) => {
-    setExpandedSlug(slug);
+    setExpandedBySlug((prev) => ({ ...prev, [slug]: true }));
     setBookingRoomSlug(slug);
     setSubmitError('');
     trackConversionEvent('room_booking_opened', '/', { categorySlug: slug });
@@ -281,7 +293,7 @@ export function RoomShowcaseAndBooking({
   return (
     <div className="space-y-6">
       {categories.map((cat, idx) => {
-        const isExpanded = expandedSlug === cat.slug;
+        const isExpanded = Boolean(expandedBySlug[cat.slug]);
         const isBookingThisRoom = bookingRoomSlug === cat.slug;
         const sectionKey = ROOM_SECTION_MAP[cat.slug];
 
@@ -310,7 +322,7 @@ export function RoomShowcaseAndBooking({
                 : 'border-[#E6E1D8] hover:border-[#8C6822]'
             }`}
           >
-            {/* ROOM CATEGORY HEADER ROW (CLICK TO EXPAND DIRECTLY UNDERNEATH) */}
+            {/* ROOM CATEGORY HEADER ROW */}
             <div className="p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
               <button
                 type="button"
@@ -322,11 +334,6 @@ export function RoomShowcaseAndBooking({
                   <span className="font-mono-tabular text-[11px] uppercase tracking-[0.22em] text-[#8C6822]">
                     Room Tier 0{idx + 1}
                   </span>
-                  {isExpanded ? (
-                    <span className="inline-flex items-center gap-1.5 bg-[#0D0D0E] text-[#FAF9F6] px-2.5 py-0.5 text-[10px] uppercase tracking-[0.18em] font-medium">
-                      <span>Currently Viewing</span>
-                    </span>
-                  ) : null}
                   {liveAvail ? (
                     <span className="text-[11px] text-[#5C574F]">
                       {liveAvail.isAvailable
@@ -336,15 +343,9 @@ export function RoomShowcaseAndBooking({
                   ) : null}
                 </div>
 
-                <div className="flex flex-wrap items-baseline justify-between gap-4">
-                  <h3 className="font-display text-2xl sm:text-4xl font-normal text-[#171614] group-hover:text-[#8C6822] transition-colors">
-                    {cat.name}
-                  </h3>
-                  <p className="font-mono-tabular text-base sm:text-lg font-medium text-[#171614]">
-                    {formatNaira(cat.nightly_rate_ngn)}{' '}
-                    <span className="text-xs font-sans font-normal text-[#6B6459]">/ night</span>
-                  </p>
-                </div>
+                <h3 className="font-display text-2xl sm:text-4xl font-normal text-[#171614] group-hover:text-[#8C6822] transition-colors">
+                  {cat.name}
+                </h3>
                 <p className="mt-2 text-sm sm:text-base text-[#5C574F] max-w-2xl leading-relaxed">
                   {cat.short_description}
                 </p>
@@ -401,7 +402,7 @@ export function RoomShowcaseAndBooking({
                           currentIndex={currentSlideIdx}
                           onSelectIndex={(nextIdx) => handleSelectSlide(cat.slug, nextIdx)}
                           portraitMode={cat.slug === 'twin-room'}
-                          portraitCoverMode={cat.slug === 'deluxe-room'}
+                          portraitCoverMode={cat.slug === 'deluxe-room' || cat.slug === 'luxury-room'}
                         />
                       </div>
 
@@ -411,20 +412,18 @@ export function RoomShowcaseAndBooking({
                           <div className="border-b border-[#EFEAE0] pb-4 flex items-start justify-between gap-4">
                             <div>
                               <p className="text-[11px] uppercase tracking-[0.2em] text-[#8C6822]">
-                                Currently Viewing
+                                Room Tier 0{idx + 1}
                               </p>
                               <h4 className="mt-1 font-display text-3xl font-normal text-[#171614]">
                                 {cat.name}
                               </h4>
                             </div>
-                            <div className="text-right">
-                              <p className="font-mono-tabular text-lg font-semibold text-[#171614]">
-                                {formatNaira(cat.nightly_rate_ngn)}
-                              </p>
-                              <p className="text-[11px] uppercase tracking-[0.14em] text-[#6B6459]">
-                                Per Night
-                              </p>
-                            </div>
+                            <Link
+                              href={`/rooms/${cat.slug}`}
+                              className="text-[11px] uppercase tracking-[0.16em] text-[#8C6822] underline hover:text-[#171614] whitespace-nowrap shrink-0 mt-1"
+                            >
+                              Room Page
+                            </Link>
                           </div>
 
                           <p className="text-sm sm:text-base leading-relaxed text-[#4A453E]">

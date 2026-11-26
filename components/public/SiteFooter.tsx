@@ -61,7 +61,10 @@ export function SiteFooter({ logoAsset, settings }: SiteFooterProps) {
             <ul className="space-y-2.5 text-sm text-[#C7C1B7]">
               <li><Link href="/book" className="hover:text-white transition-colors">Reserve a Room</Link></li>
               <li><Link href="/find-booking" className="hover:text-white transition-colors">Find Booking</Link></li>
-              <li><Link href="/explore-abraka" className="hover:text-white transition-colors">Explore Abraka</Link></li>
+              <li><Link href="/experiences" className="hover:text-white transition-colors">Experiences in Abraka</Link></li>
+              <li><Link href="/experiences/river-ethiope" className="hover:text-white transition-colors">River Ethiope</Link></li>
+              <li><Link href="/experiences/abraka-market" className="hover:text-white transition-colors">Abraka Market</Link></li>
+              <li><Link href="/experiences/abraka-top" className="hover:text-white transition-colors">Abraka Top</Link></li>
               <li><Link href="/faq" className="hover:text-white transition-colors">Frequently Asked Questions</Link></li>
               <li><Link href="/contact" className="hover:text-white transition-colors">Contact &amp; Directions</Link></li>
             </ul>

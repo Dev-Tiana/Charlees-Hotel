@@ -428,16 +428,40 @@ export function CancellationRequestsModule({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
                   <div>
-                    <p className="font-medium text-[#5C574F]">Guest Reason</p>
+                    <p className="font-medium text-[#5C574F]">Guest Cancellation Reason</p>
                     <p className="text-[#171614] mt-1">{item.reason}</p>
+                  </div>
+                  <div className="bg-[#FAF8F4] border border-[#EAE2D3] p-3">
+                    <p className="font-medium text-[#5C574F]">Guest Refund Bank Details</p>
+                    {item.refund_account_number || item.refund_bank_name || item.refund_account_name ? (
+                      <div className="mt-1 space-y-0.5 text-[#171614]">
+                        <p>
+                          <span className="text-[#6B6459]">Bank:</span>{' '}
+                          <strong>{item.refund_bank_name || '—'}</strong>
+                        </p>
+                        <p>
+                          <span className="text-[#6B6459]">Account Name:</span>{' '}
+                          {item.refund_account_name || '—'}
+                        </p>
+                        <p className="font-mono">
+                          <span className="font-sans text-[#6B6459]">Account No:</span>{' '}
+                          {item.refund_account_number || '—'}
+                        </p>
+                      </div>
+                    ) : (
+                      <p className="mt-1 text-[#6B6459]">No refund bank account supplied yet.</p>
+                    )}
                   </div>
                   <div>
                     <p className="font-medium text-[#5C574F]">Policy Window Check</p>
                     <p className="text-[#171614] mt-1">
                       {item.was_within_policy ? 'Submitted within policy window' : 'Exception / Outside window'} · Deadline:{' '}
                       <span className="font-mono">{formatLagosDateTime(item.policy_deadline_at)}</span>
+                    </p>
+                    <p className="text-[11px] text-[#6B6459] mt-1">
+                      Payment Status: <strong className="uppercase">{res?.payment_status.replace(/_/g, ' ') || '—'}</strong>
                     </p>
                   </div>
                 </div>
@@ -496,6 +520,7 @@ export function RefundManagementModule({
   const canApprove = roleHasPermission(role, 'refunds:approve');
   const canProcess = roleHasPermission(role, 'refunds:process');
   const [providerRefs, setProviderRefs] = useState<Record<string, string>>({});
+  const [refundDates, setRefundDates] = useState<Record<string, string>>({});
   const [busyId, setBusyId] = useState<string | null>(null);
   const [error, setError] = useState('');
 
@@ -514,6 +539,7 @@ export function RefundManagementModule({
           refundId: rf.id,
           action,
           providerRefundReference: providerRefs[rf.id],
+          refundDate: refundDates[rf.id] || undefined,
           attemptPaystackRefund,
           originalPaymentReference: rf.original_payment_reference || undefined,
           amountNgn: rf.amount_ngn,
@@ -538,11 +564,11 @@ export function RefundManagementModule({
           <thead className="bg-[#FAF8F4] border-b border-[#E5DFD5] text-[#5C574F]">
             <tr>
               <th className="py-3 px-4 font-medium">Booking Ref</th>
-              <th className="py-3 px-4 font-medium">Channel &amp; Payment Ref</th>
+              <th className="py-3 px-4 font-medium">Channel &amp; Guest Bank</th>
               <th className="py-3 px-4 font-medium">Policy Eligibility</th>
-              <th className="py-3 px-4 font-medium">Status</th>
+              <th className="py-3 px-4 font-medium">Refund Status</th>
               <th className="py-3 px-4 font-medium text-right">Amount</th>
-              <th className="py-3 px-4 font-medium">Workflow Action</th>
+              <th className="py-3 px-4 font-medium">Workflow &amp; Settlement Date</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[#F2EDE4]">
@@ -556,25 +582,34 @@ export function RefundManagementModule({
               data.refunds.map((rf) => {
                 const res = data.reservations.find((r) => r.id === rf.reservation_id);
                 const payment = data.payments.find((p) => p.id === rf.payment_id);
+                const cancellation = data.cancellations.find(
+                  (c) => c.id === rf.cancellation_id || c.reservation_id === rf.reservation_id
+                );
                 const isPaystack = payment?.method === 'online_paystack';
                 return (
                   <tr key={rf.id} className="hover:bg-[#FAF8F4]">
                     <td className="py-3 px-4 font-mono font-medium text-[#171614] whitespace-nowrap">
                       {res?.booking_reference || rf.reservation_id}
                     </td>
-                    <td className="py-3 px-4">
-                      <p className="capitalize text-[#171614]">
+                    <td className="py-3 px-4 space-y-1">
+                      <p className="capitalize text-[#171614] font-medium">
                         {isPaystack ? 'Paystack Refund' : 'Manual Bank Refund'}
                       </p>
                       <p className="font-mono text-[11px] text-[#6B6459]">
-                        {rf.original_payment_reference || payment?.bank_transfer_reference || 'Bank Transfer'}
+                        Orig Ref: {rf.original_payment_reference || payment?.bank_transfer_reference || 'Bank Transfer'}
                       </p>
+                      {cancellation?.refund_account_number ? (
+                        <p className="text-[11px] text-[#3F3A32] bg-[#FAF8F4] border border-[#EAE2D3] px-2 py-1">
+                          {cancellation.refund_bank_name} · {cancellation.refund_account_name} ·{' '}
+                          <span className="font-mono font-semibold">{cancellation.refund_account_number}</span>
+                        </p>
+                      ) : null}
                     </td>
                     <td className="py-3 px-4 text-[#3F3A32]">
                       {rf.eligible ? 'Eligible under policy' : 'Outside policy'}
                     </td>
                     <td className="py-3 px-4 capitalize font-medium text-[#171614]">
-                      {rf.request_status}
+                      {rf.request_status.replace(/_/g, ' ')}
                     </td>
                     <td className="py-3 px-4 text-right font-mono tabular-nums text-[#171614] whitespace-nowrap">
                       {formatNaira(rf.amount_ngn)}
@@ -611,6 +646,15 @@ export function RefundManagementModule({
                             }
                             className="h-7 px-2 text-[11px] border border-[#D8D1C5] bg-[#FAF9F6] font-mono w-40"
                           />
+                          <input
+                            type="date"
+                            aria-label="Refund processing date"
+                            value={refundDates[rf.id] || ''}
+                            onChange={(e) =>
+                              setRefundDates((prev) => ({ ...prev, [rf.id]: e.target.value }))
+                            }
+                            className="h-7 px-2 text-[11px] border border-[#D8D1C5] bg-[#FAF9F6] font-mono"
+                          />
                           {isPaystack && rf.original_payment_reference ? (
                             <button
                               type="button"
@@ -632,9 +676,12 @@ export function RefundManagementModule({
                         </div>
                       ) : null}
                       {rf.request_status === 'completed' ? (
-                        <span className="font-mono text-[11px] text-emerald-800">
-                          Ref: {rf.provider_refund_reference}
-                        </span>
+                        <div className="font-mono text-[11px] text-emerald-800 space-y-0.5">
+                          <p>Ref: {rf.provider_refund_reference}</p>
+                          <p className="text-[#5C574F]">
+                            Date: {formatLagosDateTime(rf.refund_date || rf.completed_at || rf.requested_at)}
+                          </p>
+                        </div>
                       ) : null}
                     </td>
                   </tr>

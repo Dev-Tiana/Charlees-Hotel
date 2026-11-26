@@ -12,6 +12,7 @@ const refundSchema = z.object({
   attemptPaystackRefund: z.boolean().optional(),
   originalPaymentReference: z.string().optional(),
   amountNgn: z.number().optional(),
+  refundDate: z.string().max(40).optional(),
 });
 
 export async function POST(req: NextRequest) {
@@ -69,6 +70,7 @@ export async function POST(req: NextRequest) {
       providerRefundReference: providerRef,
       failureReason,
       notes: parsed.data.notes,
+      refundDate: parsed.data.refundDate,
       actor: {
         userId: session.userId,
         staffId: session.staffId,

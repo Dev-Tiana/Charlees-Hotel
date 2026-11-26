@@ -383,20 +383,21 @@ export const INITIAL_FACILITIES: FacilityItem[] = [
 
 export const INITIAL_MEDIA_ASSETS: MediaAsset[] = [
   {
-    id: 'prop-hero-poster',
-    title: 'Charlees Hotel & Suites Architectural Dusk Hero',
+    id: 'prop-hero-video',
+    title: 'Charlees Hotel & Suites Pool Courtyard Architecture',
     alt_text:
-      'Exterior dusk vista of Charlees Hotel and Suites in Abraka, Delta State.',
-    media_type: 'image',
+      'Sunlit white plaster courtyard, swimming pool, and terrace architecture at Charlees Hotel and Suites, Abraka.',
+    media_type: 'video',
     section_key: 'hero',
     category_slug: null,
-    storage_path: '/media/hero/charlees-hero-poster.jpg',
-    public_url: '/media/hero/charlees-hero-poster.jpg',
+    storage_path: '/media/hero/charlees-pool-courtyard-hero.mp4',
+    public_url: '/media/hero/charlees-pool-courtyard-hero.mp4',
+    poster_url: '/media/hero/charlees-pool-courtyard-hero-poster.jpg',
     drive_file_id: null,
     sort_order: 1,
     is_published: true,
     uploaded_by_staff_id: null,
-    created_at: '2026-11-24T00:00:00.000Z',
+    created_at: '2026-11-26T00:00:00.000Z',
   },
   {
     id: 'prop-exterior-01',

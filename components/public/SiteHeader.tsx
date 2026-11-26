@@ -13,7 +13,7 @@ interface SiteHeaderProps {
 const MAIN_NAV_LINKS = [
   { href: '/rooms', label: 'Rooms' },
   { href: '/facilities', label: 'Facilities' },
-  { href: '/explore-abraka', label: 'Abraka' },
+  { href: '/experiences', label: 'Experiences' },
   { href: '/contact', label: 'Contact' },
 ];
 

@@ -473,7 +473,9 @@ export function MediaManagementModule({
               <option value="pool">Swimming Pool</option>
               <option value="rooftop">Rooftop Lounge</option>
               <option value="dining">Dining Space</option>
-              <option value="abraka">River Ethiope / Abraka</option>
+              <option value="exp_river_ethiope">Experience · River Ethiope</option>
+              <option value="exp_abraka_market">Experience · Abraka Market</option>
+              <option value="exp_abraka_top">Experience · Abraka Top</option>
               <option value="gallery">General Gallery</option>
             </select>
             <input
@@ -549,7 +551,10 @@ export function MediaManagementModule({
           <option value="pool">Swimming Pool</option>
           <option value="rooftop">Rooftop Lounge</option>
           <option value="dining">Dining Space</option>
-          <option value="abraka">River Ethiope / Abraka</option>
+          <option value="exp_river_ethiope">Experience · River Ethiope</option>
+          <option value="exp_abraka_market">Experience · Abraka Market</option>
+          <option value="exp_abraka_top">Experience · Abraka Top</option>
+          <option value="gallery">General Gallery</option>
         </select>
       </div>
 

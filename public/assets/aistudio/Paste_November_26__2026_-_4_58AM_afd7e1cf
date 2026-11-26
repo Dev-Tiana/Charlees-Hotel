@@ -1,0 +1,774 @@
+# CHARLEES HOTEL & SUITES
+## Comprehensive Website and Management System Corrections
+
+Implement all the corrections and improvements below in the existing Charlees Hotel & Suites project.
+
+**Do not rebuild the website, replace its established design system, change its visual identity unnecessarily, or remove existing working functionality.** Work carefully within the existing project architecture. Preserve all working integrations, components, data and features.
+
+The objective is to correct the existing problems, improve the website's visual presentation, make the media more prominent, improve the guest experience and ensure the management dashboard works properly.
+
+---
+
+# 1. Cancellation Request Form and Refund Management
+
+Improve the existing reservation cancellation request process.
+
+When a guest requests cancellation, display a proper form containing:
+
+- **Reason for cancellation:** A text field where the guest explains why they want to cancel.
+- **Account name:** Name registered on the bank account.
+- **Bank name:** Bank where the refund should be sent.
+- **Account number:** Account number for receiving the refund.
+
+Make these details available to authorized administrators when reviewing cancellation requests.
+
+### Cancellation rules
+
+Retain the previously established cancellation eligibility rules:
+
+- Advance bookings: Guests can request cancellation only up to one day before their check-in day.
+- Same-day bookings: Guests can request cancellation within one hour after making the booking.
+- Enforce these rules using the hotel's local timezone.
+- If the cancellation window has expired, do not submit the request.
+
+Display this message when a reservation is no longer eligible:
+
+"The cancellation window for this reservation has expired. Please contact the hotel for assistance."
+
+### Administrator approval and refunds
+
+- Cancellation requests must require administrator review and approval.
+- Administrators must be able to view the guest's reason and refund bank details.
+- Provide options to approve or reject cancellation requests.
+- Do not automatically approve cancellations.
+- Do not automatically mark refunds as completed.
+- Once approved, allow the administrator to process the refund using the supplied bank details.
+- Record the refund amount, status, transaction reference and processing date.
+- Keep a complete audit trail of cancellation decisions and refund actions.
+- Protect banking information and restrict access to authorized administrators.
+- Validate the supplied account details.
+
+The reservation status, cancellation status and refund status must remain separate and accurately reflect what has actually happened.
+
+---
+
+# 2. Management Dashboard Layout
+
+Correct the management dashboard navigation and layout.
+
+I want a proper side-by-side dashboard structure.
+
+### Left sidebar
+
+- The main navigation must occupy a dedicated vertical sidebar on the left.
+- Arrange menu items vertically with appropriate icons and clear labels.
+- Highlight the currently selected menu item.
+- Keep the sidebar visually distinct from the main content.
+- Do not display the dashboard navigation horizontally across the top.
+
+The sidebar should contain the relevant existing dashboard modules, including:
+
+- Overview
+- Reservations
+- Room Management
+- Room Availability
+- Payments and Transactions
+- Bank Transfer Confirmations
+- Cancellation Requests
+- Refund Management
+- Staff Management
+- Live Chat
+- Housekeeping
+- Maintenance
+- Rates and Packages
+- Media Management
+- Reports
+- Audit Logs
+- Settings
+
+Only display functional modules. Do not create decorative menu items that do nothing.
+
+### Main content
+
+- The selected menu item's content must appear immediately beside the sidebar, on the right.
+- Keep the sidebar and main content visible side by side on desktop.
+- Do not stack the navigation above the content on desktop.
+- Do not allow the navigation to push the dashboard content underneath it.
+
+### Mobile
+
+Use a properly designed collapsible sidebar or navigation drawer on smaller screens.
+
+### Visual improvements
+
+Improve dashboard spacing, typography, cards, tables, headings and overall information hierarchy.
+
+Keep a clearly visible **Return to Website** link so staff can navigate back to the public Charlees Hotel & Suites website.
+
+The dashboard should feel professional, organized and easy for hotel staff to operate.
+
+---
+
+# 3. Booking Payment Receipt
+
+Redesign the payment receipt generated after a successful reservation payment.
+
+The payment reference must appear **inside the receipt**, not separately outside it.
+
+### Receipt information
+
+Include:
+
+- Charlees Hotel & Suites branding.
+- Guest name.
+- Booking reference.
+- Payment reference.
+- Room category.
+- Check-in date.
+- Check-out date.
+- Payment date.
+- Amount paid.
+- Payment method.
+- Payment status.
+
+### Receipt footer
+
+Include a clearly visible **Copy Booking Reference** button at the bottom of the receipt.
+
+The button must copy the correct booking reference so the guest can use it later in the Find Booking feature.
+
+### Receipt presentation
+
+- Use a polished and professional layout.
+- Make it easy to read.
+- Ensure it displays properly on desktop and mobile.
+- Allow downloading, printing and sharing as a PDF.
+- Keep booking and payment references clearly visible.
+
+Do not generate a successful payment receipt for an unverified or pending payment.
+
+### Bank transfer
+
+When a guest selects bank transfer, display the appropriate pending confirmation notice.
+
+A pending bank transfer must not generate a successful payment receipt. The reservation must remain pending until an authorized administrator confirms that the funds have actually been received.
+
+Never treat an uploaded transfer receipt or a guest's claim as proof of successful payment.
+
+---
+
+# 4. Improve Media Sizing and Presentation Across the Entire Website
+
+This is a major visual correction.
+
+The existing photographs and videos are not displaying properly. Some retain their original dimensions, some appear too small, and some do not fill their designated containers.
+
+Simply applying `object-fit: cover` is not enough if the actual containers are too small.
+
+**Increase the dimensions of the media containers themselves.** The photographs and videos must become much more prominent.
+
+Apply this correction across all existing website sections, including:
+
+- Homepage media.
+- All room galleries.
+- River Ethiope experience.
+- Abraka Market experience.
+- Abraka Top experience.
+- Swimming pool.
+- Rooftop.
+- Other facilities.
+- Packages.
+- Other existing visual sections.
+
+### Container dimensions
+
+- Expand undersized media containers.
+- Make room gallery visuals particularly large and prominent.
+- Give individual room viewing pages generous media display areas.
+- Use a much larger visual presentation instead of small photographs surrounded by excessive empty space.
+- Maintain consistent dimensions between slides belonging to the same gallery.
+- Ensure the media remains visually dominant within each section.
+
+### Image and video fitting
+
+- Every image and video must fit its assigned container.
+- Use appropriate `object-fit: cover` and `object-position` settings.
+- Preserve the original aspect ratio.
+- Never stretch, squeeze or distort the media.
+- Prevent overflow, black bars and unwanted empty margins.
+- Avoid cropping out important room and property details.
+- Videos must fill the same gallery area as photographs.
+- Maintain responsive sizing on desktop, tablet and mobile.
+
+Do not replace the existing uploaded media or change its actual content.
+
+---
+
+# 5. Edit Existing Uploaded Images and Videos
+
+The existing photographs and videos have already been uploaded through the management dashboard and are displaying on the public website. However, many have not been properly edited.
+
+Work with the actual media already stored in the project.
+
+Do not ask me to upload everything again.
+
+### Professional visual correction
+
+Inspect and improve the existing media where necessary:
+
+- Brightness.
+- Exposure.
+- Contrast.
+- Colour balance.
+- Sharpness.
+- Overall visual clarity.
+
+Keep the actual appearance of the hotel's rooms, facilities and surroundings natural.
+
+Do not apply excessive filters or artificial effects.
+
+### Remove TikTok branding
+
+Remove all unwanted TikTok elements from uploaded photographs and videos, including:
+
+- TikTok watermarks.
+- TikTok logos.
+- Usernames and account handles.
+- TikTok icons.
+- Social media interface elements.
+- Promotional overlays.
+- Unwanted TikTok end screens and branding.
+
+For videos, clean the beginning and ending where necessary. Remove unwanted end screens and trim unnecessary clips.
+
+Do not simply crop out important hotel details to remove a watermark. Use an appropriate editing method that preserves the important visual content.
+
+Ensure no visible TikTok branding remains in the final website media.
+
+### File management
+
+- Preserve the original uploaded files.
+- Save edited and optimized versions separately.
+- Use the edited versions for public website display.
+- Do not replace authentic hotel media with AI-generated or unrelated stock photographs.
+- Optimize media for fast loading without noticeably reducing quality.
+
+Apply this to existing uploaded media throughout the website, not only the Luxury Room gallery.
+
+---
+
+# 6. Homepage Hero Video Brightness
+
+This is an important visual correction.
+
+The current homepage hero video appears too dark because of a dark opacity overlay.
+
+I do not want the video darkened.
+
+### Video brightness
+
+- Remove the heavy dark overlay currently covering the hero video.
+- Allow the original video brightness, exposure and colours to show clearly.
+- Make the hero video very bright, vibrant and visually clear.
+- Do not apply dark filters or reduce the video's brightness.
+- Preserve the actual appearance and colour quality of the footage.
+
+The video must remain the background of the existing hero section.
+
+Do not place it in a separate container beneath the hero text or create another section for it.
+
+### Hero text readability
+
+Adjust only the text so it remains readable against the bright video.
+
+You may adjust:
+
+- Text colour.
+- Font weight.
+- Font size.
+- Text shadow where necessary.
+- Typography and positioning.
+- Spacing between the heading, description and buttons.
+
+Do not add a coloured background, opaque box, dark card or background panel behind the text.
+
+Do not darken the video to improve text readability.
+
+Keep the existing hero content and button functionality.
+
+---
+
+# 7. Separate and Reorganize the Experiences Section
+
+The current experience presentation needs to be restructured.
+
+The experiences must not be grouped together as though they are one destination or one attraction.
+
+### Navigation correction
+
+Change the existing **Abraka** navigation label to **Experiences**.
+
+The Experiences navigation item should lead to a dedicated page or section containing the individual experiences.
+
+### Create separate experience sections
+
+Create three independent experience sections:
+
+1. River Ethiope.
+2. Abraka Market.
+3. Abraka Top.
+
+Each represents a different place or experience and must have its own identity.
+
+### River Ethiope
+
+Create a dedicated River Ethiope experience section.
+
+Use its own:
+
+- Heading.
+- Introduction.
+- Detailed description.
+- Gallery.
+- Images and videos.
+- Relevant visitor information.
+
+Research the River Ethiope and its tourism and recreational significance in Abraka, Delta State.
+
+Describe its natural environment, clear water, riverbank surroundings and relevant recreational activities using verified information.
+
+Do not invent facilities, prices, opening hours, safety guarantees or services.
+
+### Abraka Market
+
+Create a completely separate Abraka Market experience section.
+
+Use its own:
+
+- Heading.
+- Introduction.
+- Detailed description.
+- Gallery.
+- Images and videos.
+- Relevant visitor information.
+
+Research the correct Abraka Market in Abraka, Ethiope East, Delta State.
+
+Describe its actual location, market environment, trading activities and what visitors can expect.
+
+Be careful not to confuse the Abraka Market in Abraka with the former market area also referred to as Abraka Market in Asaba.
+
+Verify the exact destination before publishing information.
+
+### Abraka Top
+
+Create a third independent experience section for Abraka Top.
+
+Use its own:
+
+- Heading.
+- Introduction.
+- Detailed description.
+- Gallery.
+- Images and videos.
+- Relevant visitor information.
+
+Research and verify what Abraka Top refers to, its correct location, characteristics and visitor experience.
+
+Do not invent information if reliable sources cannot establish its identity. Do not confuse it with another destination.
+
+If its identity or details remain uncertain, keep its content unpublished or clearly mark the description for verification rather than publishing fabricated information.
+
+### Research and content requirements
+
+Research all three experiences using reliable online sources.
+
+Use relevant tourism sources, official sources, credible publications and other trustworthy references.
+
+Write original, informative descriptions that explain what makes each destination different.
+
+The descriptions should:
+
+- Be detailed enough to inform prospective visitors.
+- Use natural language.
+- Include relevant location information.
+- Explain the experience visitors can expect.
+- Avoid exaggerated promotional claims.
+- Avoid generic AI-generated luxury language.
+- Avoid invented facts and unsupported claims.
+
+### Search engine visibility
+
+Each experience must have its own dedicated search-friendly page or independently indexable section.
+
+Provide:
+
+- Unique page titles.
+- Unique meta descriptions.
+- Descriptive headings.
+- Relevant search terms used naturally.
+- Appropriate image alt text.
+- Descriptive image and video filenames where possible.
+- Structured data where appropriate and factually supported.
+- Internal links between the experiences and the hotel website.
+
+The objective is for people searching for River Ethiope, Abraka Market or Abraka Top to find useful information about the correct destination.
+
+### Separate media management
+
+This separation is essential.
+
+Each experience must have its own independent media collection in the management dashboard.
+
+River Ethiope media must only appear in the River Ethiope gallery.
+
+Abraka Market media must only appear in the Abraka Market gallery.
+
+Abraka Top media must only appear in the Abraka Top gallery.
+
+Do not combine their images or videos.
+
+I will upload separate photographs and videos for each experience through the management dashboard. Ensure the media management system supports this separation.
+
+Do not use photographs from one destination to represent another.
+
+---
+
+# 8. Separate the Rooftop and Swimming Pool Sections
+
+The rooftop and swimming pool are currently being presented together within the same parent container or shared section.
+
+I do not like this arrangement.
+
+They are two different hotel facilities and must have separate visual identities.
+
+### Swimming Pool
+
+Give the swimming pool its own independent section with:
+
+- Its own heading.
+- Its own description.
+- Its own media container.
+- Its own image and video gallery.
+
+### Rooftop
+
+Give the rooftop its own independent section with:
+
+- Its own heading.
+- Its own description.
+- Its own media container.
+- Its own image and video gallery.
+
+Do not place the rooftop and swimming pool inside the same gallery or make them share the same media collection.
+
+They can remain within the broader facilities or experiences architecture if appropriate, but each must have its own independent presentation and media.
+
+Do not mix their photographs and videos.
+
+---
+
+# 9. Correct Gallery Navigation and Image Visibility
+
+The current gallery presentation exposes upcoming photographs and videos beneath or outside the main viewing container.
+
+I do not want this.
+
+Redesign the gallery viewing behaviour.
+
+### Only one visual should be visible at a time
+
+- Display only the image or video the visitor is currently viewing.
+- Hide all other gallery items completely.
+- Do not display upcoming images underneath the main gallery.
+- Do not allow the next image to peek out from beneath or beside the current container.
+- Do not display a stacked collection of images.
+- Do not show a visible strip of upcoming photographs.
+
+### Navigation
+
+Visitors should move through the gallery deliberately.
+
+Provide:
+
+- A previous arrow.
+- A next arrow.
+- Swipe navigation on touch devices.
+- Subtle pagination indicators showing the current position.
+
+When the visitor clicks Next, display the next visual.
+
+When the visitor clicks Previous, display the previous visual.
+
+The gallery must show only the selected visual after each navigation action.
+
+### Media viewer
+
+- Keep all gallery items within one consistent viewing area.
+- Use smooth transitions without exposing other slides.
+- Ensure the navigation controls remain visible and usable.
+- Support desktop and mobile interactions.
+- Prevent controls from interfering with video playback.
+- Keep the current visual large and prominent.
+
+Apply this gallery behaviour consistently to room galleries, experiences, facilities and other relevant visual sections.
+
+---
+
+# 10. Improve Room Listings on the Homepage
+
+The current room section asks visitors to select a room category to explore its photographs and book directly.
+
+I do not want visitors to have to click a room category before they can see the photographs and basic room information.
+
+Not every visitor will have the patience to click through several pages just to discover what a room looks like.
+
+### Display all room categories directly
+
+On the homepage, show all four existing room categories:
+
+- Standard Room.
+- Twin Room.
+- Deluxe Room.
+- Luxury Room.
+
+Each room must have its own visible presentation.
+
+### What must appear without clicking
+
+Every room card or section must display:
+
+- A prominent room photograph or gallery preview.
+- Room category name.
+- A useful room description.
+- Verified room amenities and features.
+- Relevant booking information.
+- A clear booking button.
+- A link to explore the full room gallery or additional details.
+
+Do not hide the room photographs behind a category selection.
+
+Do not require visitors to click "View Room", "View More" or another button just to discover the room's appearance and basic details.
+
+### Room galleries
+
+Each room must have its own separate gallery.
+
+Do not mix media between:
+
+- Standard Room.
+- Twin Room.
+- Deluxe Room.
+- Luxury Room.
+
+When a visitor opens a room, show a large, prominent gallery with the correct room's images and videos.
+
+The gallery should use the improved single-visual navigation described above.
+
+### Room pricing
+
+Keep the existing room rates internally for booking and payment calculations.
+
+Do not display room prices on the public website.
+
+Do not invent or change room amenities, features or descriptions. Use only verified hotel information.
+
+---
+
+# 11. Preserve Existing Booking and Payment Functionality
+
+Do not break or remove any existing booking and payment functionality.
+
+Preserve:
+
+- Room browsing.
+- Room galleries.
+- Booking forms.
+- Paystack integration.
+- Bank transfer workflow.
+- Find Booking.
+- Cancellation eligibility checks.
+- Staff authentication.
+- Management dashboard modules.
+- Live chat.
+- Existing website navigation.
+
+### Paystack
+
+Preserve the existing Paystack integration.
+
+Where payment verification is implemented, ensure the system verifies transactions directly with Paystack through the secure backend before confirming reservations.
+
+Do not trust the browser redirect alone.
+
+Handle failed, abandoned, duplicated and delayed payment responses correctly.
+
+Never expose secret payment credentials in frontend code.
+
+### Bank transfer
+
+Preserve the existing bank transfer workflow.
+
+A transfer must remain pending until an authorized administrator confirms actual receipt of funds.
+
+Do not automatically confirm a reservation based on a submitted transfer receipt.
+
+### Find Booking
+
+Preserve the existing Find Booking functionality.
+
+Guests must be able to locate their reservation using the correct booking reference and email verification process.
+
+Display the correct reservation, payment and cancellation status.
+
+Do not introduce duplicate booking workflows or remove existing reservation records.
+
+---
+
+# 12. Preserve Existing Project Architecture and Functionality
+
+Do not unnecessarily restructure the entire application.
+
+Before making changes:
+
+1. Inspect the existing project structure.
+2. Identify the existing components responsible for the website sections, galleries, room listings, booking process and management dashboard.
+3. Identify how uploaded media is stored and retrieved.
+4. Understand the existing data relationships between rooms, experiences and facilities.
+5. Identify the actual cause of the current media sizing and gallery display problems.
+
+Make targeted improvements to the existing implementation.
+
+Do not create duplicate components, duplicate sections, duplicate booking systems or conflicting media collections.
+
+Do not remove existing data or integrations.
+
+Do not replace real functionality with simulated features.
+
+Do not claim that a feature is connected to a real backend or payment provider if it is only using mock data.
+
+Preserve existing Supabase configuration, project data and integrations. Do not delete or replace them.
+
+---
+
+# 13. Performance and Responsiveness
+
+The website must remain fast and responsive after these changes.
+
+Improve:
+
+- Image optimization.
+- Video loading.
+- Lazy loading for media outside the initial viewport.
+- Responsive image delivery.
+- Efficient gallery rendering.
+- Navigation performance.
+- Unnecessary API requests.
+- Unnecessary component rendering.
+- Media caching where appropriate.
+
+Do not load every large gallery video immediately when the homepage opens.
+
+Load the active visual and prepare subsequent gallery items efficiently.
+
+Do not introduce artificial delays or unnecessary loading animations.
+
+Ensure the website works properly on:
+
+- Desktop.
+- Laptop.
+- Tablet.
+- Mobile phones.
+
+---
+
+# 14. Testing and Verification
+
+Do not finish after merely changing the appearance of the components.
+
+Test the actual website and management dashboard.
+
+### Cancellation and refund tests
+
+1. Guest submits a cancellation request with a reason and refund bank details.
+2. Administrator can view the request and supplied bank details.
+3. Administrator approves a cancellation.
+4. Administrator rejects a cancellation.
+5. Refund status and transaction information are recorded correctly.
+6. Expired cancellation requests are blocked.
+
+### Payment receipt tests
+
+7. Verified Paystack payment generates a successful receipt.
+8. Booking and payment references appear inside the receipt.
+9. Copy Booking Reference copies the correct value.
+10. Pending bank transfers display the correct pending notice.
+11. Pending payments do not generate successful receipts.
+
+### Dashboard tests
+
+12. Dashboard sidebar appears vertically on the left.
+13. Selected module content appears beside the sidebar.
+14. Desktop layout remains side by side.
+15. Mobile navigation works as a collapsible drawer.
+16. Return to Website navigation works.
+17. Existing dashboard modules remain functional.
+
+### Media tests
+
+18. Existing uploaded images and videos are properly edited.
+19. TikTok watermarks, logos, usernames and interface elements are removed.
+20. Media containers are visibly larger and more prominent.
+21. Images and videos fit their containers without distortion.
+22. No media overflows its container.
+23. No unwanted black bars or empty margins appear.
+24. Gallery navigation displays only the currently selected visual.
+25. Previous, Next and swipe navigation work correctly.
+26. Room galleries contain only their respective room media.
+27. River Ethiope, Abraka Market and Abraka Top have independent galleries.
+28. Rooftop and swimming pool have independent sections and galleries.
+
+### Homepage and room tests
+
+29. Homepage hero video is bright and free of the heavy dark overlay.
+30. Hero text remains readable directly over the video.
+31. All four room categories display photographs and basic details without requiring visitors to click first.
+32. Individual room galleries display prominently.
+33. Room booking buttons work correctly.
+
+### SEO and research tests
+
+34. Each experience has its own accurate description.
+35. The three destinations are not confused with one another.
+36. Each experience has its own search-friendly title and description.
+37. Image alt text accurately describes the actual photographs.
+38. No unsupported claims or invented visitor information have been published.
+
+Test the actual desktop and mobile layouts, not just the code.
+
+If a feature cannot be tested because a real service, credential or external dependency is unavailable, state that clearly instead of claiming it passed.
+
+---
+
+# 15. Final Implementation Instructions
+
+Work through these corrections carefully and systematically.
+
+Prioritize the actual problems rather than making unnecessary cosmetic changes.
+
+The most important outcomes are:
+
+1. A properly functioning cancellation and refund workflow.
+2. A professional management dashboard with a left sidebar and side-by-side content.
+3. A properly designed and verified booking payment receipt.
+4. Larger, more prominent media containers throughout the website.
+5. Professionally edited uploaded photographs and videos, free of TikTok branding.
+6. A bright homepage hero video with readable text directly over it.
+7. Three separate and properly researched experiences: River Ethiope, Abraka Market and Abraka Top.
+8. Separate rooftop and swimming pool sections.
+9. Gallery navigation that displays only the currently selected visual.
+10. Homepage room listings that immediately show photographs and essential room details without requiring an extra click.
+
+**Do not simply tell me that these changes have been made. Implement them in the existing project, inspect the results, test the functionality and correct any problems you discover.**
+
+Preserve the established Charlees Hotel & Suites visual identity, authentic hotel media, existing project architecture and working functionality.

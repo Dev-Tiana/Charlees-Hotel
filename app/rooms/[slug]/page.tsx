@@ -6,7 +6,6 @@ import { PublicShell } from '@/components/public/PublicShell';
 import { RoomShowcaseAndBooking } from '@/components/public/RoomShowcaseAndBooking';
 import { HotelDataService } from '@/lib/services/hotel-data-service';
 import {
-  formatNaira,
   getLagosDateString,
   getLagosTomorrowDateString,
 } from '@/lib/timezone';
@@ -65,12 +64,9 @@ export default async function RoomDetailPage({
         </Link>
 
         <div className="max-w-3xl space-y-3 pb-10 border-b border-[#E6E1D8] mb-10">
-          <div className="flex flex-wrap items-center gap-4 text-xs uppercase tracking-[0.22em] text-[#8C6822]">
-            <span>Verified Room Tier · Abraka</span>
-            <span className="font-mono-tabular text-[#171614] font-semibold">
-              {formatNaira(category.nightly_rate_ngn)} / Night
-            </span>
-          </div>
+          <p className="text-xs uppercase tracking-[0.22em] text-[#8C6822]">
+            Verified Room Tier · Abraka
+          </p>
           <h1 className="font-display text-4xl sm:text-5xl font-normal text-[#171614]">
             {category.name}
           </h1>

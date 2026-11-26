@@ -39,7 +39,7 @@ export function ExperienceMediaGallery({
   subtitle,
   assets,
   aspectClass = 'aspect-[4/5]',
-  maxWidthClass = 'max-w-[460px]',
+  maxWidthClass = 'max-w-2xl',
   tone = 'light',
 }: ExperienceMediaGalleryProps) {
   const isDark = tone === 'dark';
@@ -250,7 +250,7 @@ export function ExperienceMediaGallery({
                     muted={isMuted}
                     loop
                     playsInline
-                    preload="metadata"
+                    preload="none"
                     aria-label={activeAsset.alt_text || `${title} tour video`}
                     onPlay={() => setIsPlaying(true)}
                     onPause={() => setIsPlaying(false)}
@@ -318,9 +318,10 @@ export function ExperienceMediaGallery({
                   src={activeAsset.public_url}
                   alt={activeAsset.alt_text || activeAsset.title || title}
                   fill
+                  loading="lazy"
                   draggable={false}
                   referrerPolicy="no-referrer"
-                  sizes="(max-width: 1024px) 100vw, 460px"
+                  sizes="(max-width: 1024px) 100vw, 672px"
                   className={`object-cover ${posClass}`}
                 />
               )}
@@ -437,66 +438,6 @@ export function ExperienceMediaGallery({
                       : 'w-1.5 bg-[#C8C0B2] hover:bg-[#8C6822]'
                   }`}
                 />
-              </button>
-            );
-          })}
-        </div>
-      ) : null}
-
-      {/* Uniform Aspect-Matched Thumbnail Strip */}
-      {orderedAssets.length > 1 ? (
-        <div className="mt-3 grid grid-cols-4 gap-2">
-          {orderedAssets.map((asset, assetIdx) => {
-            const isActive = assetIdx === safeIndex;
-            const thumbPos = asset.object_position
-              ? OBJECT_POSITION_CLASSES[asset.object_position]
-              : 'object-center';
-            return (
-              <button
-                key={asset.id}
-                type="button"
-                onClick={() => goToIndex(assetIdx)}
-                aria-label={
-                  asset.media_type === 'video'
-                    ? `Select ${title} video cover`
-                    : `Select ${title} photo ${assetIdx + 1}`
-                }
-                className={`relative overflow-hidden border transition-all ${aspectClass} ${
-                  isActive
-                    ? isDark
-                      ? 'border-[#D6B46A] ring-1 ring-[#D6B46A]'
-                      : 'border-[#0D0D0E] ring-1 ring-[#0D0D0E]'
-                    : isDark
-                    ? 'border-[#2C2822] opacity-75 hover:opacity-100 hover:border-[#8C6822]'
-                    : 'border-[#D8D1C5] opacity-75 hover:opacity-100'
-                }`}
-              >
-                {asset.media_type === 'video' ? (
-                  <div className="relative h-full w-full bg-[#0D0D0E]">
-                    {asset.poster_url ? (
-                      <Image
-                        src={asset.poster_url}
-                        alt={asset.alt_text || `${title} video preview`}
-                        fill
-                        referrerPolicy="no-referrer"
-                        sizes="110px"
-                        className={`object-cover ${thumbPos} opacity-85`}
-                      />
-                    ) : null}
-                    <span className="absolute inset-0 flex items-center justify-center bg-[#0D0D0E]/30 text-[#FAF9F6]">
-                      <Play className="w-4 h-4 fill-current" aria-hidden="true" />
-                    </span>
-                  </div>
-                ) : (
-                  <Image
-                    src={asset.public_url}
-                    alt={asset.alt_text || `${title} thumbnail ${assetIdx + 1}`}
-                    fill
-                    referrerPolicy="no-referrer"
-                    sizes="110px"
-                    className={`object-cover ${thumbPos}`}
-                  />
-                )}
               </button>
             );
           })}

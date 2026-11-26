@@ -80,16 +80,6 @@ export function HeroBackgroundVideo({ src, poster }: HeroBackgroundVideoProps) {
         }`}
       />
 
-      {/* Measured contrast scrims so foreground typography maintains >= 4.5:1 legibility */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-t from-[#0D0D0E]/90 via-[#0D0D0E]/55 to-[#0D0D0E]/45 pointer-events-none"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-[#0D0D0E]/85 via-[#0D0D0E]/45 to-transparent pointer-events-none"
-      />
-
       {/* Accessible ambient motion control (WCAG 2.2.2) */}
       <button
         type="button"

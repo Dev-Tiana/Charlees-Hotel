@@ -26,6 +26,9 @@ const ALLOWED_SECTIONS = new Set<MediaAsset['section_key']>([
   'rooftop',
   'dining',
   'abraka',
+  'exp_river_ethiope',
+  'exp_abraka_market',
+  'exp_abraka_top',
   'gallery',
 ]);
 

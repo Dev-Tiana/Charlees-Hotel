@@ -4,7 +4,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Minus, Plus } from 'lucide-react';
 import { RoomCategory } from '@/lib/types';
-import { formatNaira } from '@/lib/timezone';
 import { trackConversionEvent } from '@/components/public/AnalyticsTracker';
 
 function getTodayAndTomorrow() {
@@ -270,22 +269,13 @@ export function AvailabilityBar({
                 }`}
               >
                 <div>
-                  <div className="flex items-baseline justify-between gap-2">
-                    <h3 className="font-display text-xl text-[#FAF9F6]">
-                      {item.category.name}
-                    </h3>
-                    <span className="font-mono-tabular text-xs text-[#D6B46A]">
-                      {formatNaira(item.category.nightly_rate_ngn)}
-                    </span>
-                  </div>
+                  <h3 className="font-display text-xl text-[#FAF9F6]">
+                    {item.category.name}
+                  </h3>
                   <p className="mt-1 text-xs text-[#A8A298]">
                     {item.isAvailable
                       ? `${item.availableRoomsCount} of ${item.totalActiveRooms} rooms open`
                       : 'Unavailable for selected dates'}
-                  </p>
-                  <p className="mt-1 font-mono-tabular text-[11px] text-[#9E978B]">
-                    Est. {item.nights} {item.nights === 1 ? 'night' : 'nights'}:{' '}
-                    {formatNaira(item.category.nightly_rate_ngn * item.nights)}
                   </p>
                 </div>
                 <Link

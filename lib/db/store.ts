@@ -100,12 +100,87 @@ function createInitialState(): RuntimeDatabase {
 function normalizeRuntimeDb(parsed: RuntimeDatabase): { db: RuntimeDatabase; dirty: boolean } {
   let dirty = false;
 
+  const UPLOAD_CLEAN_MAP: Record<string, { public_url: string; storage_path: string; poster_url?: string }> = {
+    '/uploads/hero-1795707736754-dc8bc883.mp4': {
+      public_url: '/media/hero/charlees-pool-courtyard-hero.mp4',
+      storage_path: '/media/hero/charlees-pool-courtyard-hero.mp4',
+      poster_url: '/media/hero/charlees-pool-courtyard-hero-poster.jpg',
+    },
+    '/uploads/logo-1795706437982-3a68bde3.jpg': {
+      public_url: '/media/property/charlees-official-logo.webp',
+      storage_path: '/media/property/charlees-official-logo.webp',
+    },
+    '/uploads/room_standard-1795706694088-35e30a70.webp': {
+      public_url: '/media/rooms/standard/charlees-standard-room-01.webp',
+      storage_path: '/media/rooms/standard/charlees-standard-room-01.webp',
+    },
+    '/uploads/room_standard-1795706716895-3a283fff.webp': {
+      public_url: '/media/rooms/standard/charlees-standard-room-02.webp',
+      storage_path: '/media/rooms/standard/charlees-standard-room-02.webp',
+    },
+    '/uploads/room_standard-1795706756914-875e1080.webp': {
+      public_url: '/media/rooms/standard/charlees-standard-room-03.webp',
+      storage_path: '/media/rooms/standard/charlees-standard-room-03.webp',
+    },
+    '/uploads/room_standard-1795706774492-c64c0550.webp': {
+      public_url: '/media/rooms/standard/charlees-standard-room-04.webp',
+      storage_path: '/media/rooms/standard/charlees-standard-room-04.webp',
+    },
+    '/uploads/room_standard-1795706801768-3efa9173.webp': {
+      public_url: '/media/rooms/standard/charlees-standard-room-05.webp',
+      storage_path: '/media/rooms/standard/charlees-standard-room-05.webp',
+    },
+    '/uploads/room_standard-1795706851367-65577eb1.webp': {
+      public_url: '/media/rooms/standard/charlees-standard-room-06.webp',
+      storage_path: '/media/rooms/standard/charlees-standard-room-06.webp',
+    },
+    '/uploads/exterior-1795706936721-588db6be.jpeg': {
+      public_url: '/media/property/charlees-suite-interior-01.webp',
+      storage_path: '/media/property/charlees-suite-interior-01.webp',
+    },
+    '/uploads/exterior-1795706948740-44f63a70.jpeg': {
+      public_url: '/media/property/charlees-standard-bed-02.webp',
+      storage_path: '/media/property/charlees-standard-bed-02.webp',
+    },
+    '/media/river-ethiope/river-ethiope-tour.mp4': {
+      public_url: '/media/river-ethiope/river-ethiope-tour-clean.mp4',
+      storage_path: '/media/river-ethiope/river-ethiope-tour-clean.mp4',
+      poster_url: '/media/river-ethiope/river-ethiope-poster-clean.jpg',
+    },
+    '/media/river-ethiope/river-ethiope-02-boat-excursion.webp': {
+      public_url: '/media/river-ethiope/river-ethiope-02-boat-excursion-clean.webp',
+      storage_path: '/media/river-ethiope/river-ethiope-02-boat-excursion-clean.webp',
+    },
+    '/media/river-ethiope/river-ethiope-03-delta-riverbank.webp': {
+      public_url: '/media/river-ethiope/river-ethiope-03-delta-spring-clean.webp',
+      storage_path: '/media/river-ethiope/river-ethiope-03-delta-spring-clean.webp',
+    },
+  };
+
+  if (parsed.media_assets) {
+    for (const m of parsed.media_assets) {
+      if (m.section_key === 'abraka') {
+        m.section_key = 'exp_river_ethiope';
+        dirty = true;
+      }
+      const mapped = UPLOAD_CLEAN_MAP[m.public_url] || UPLOAD_CLEAN_MAP[m.storage_path];
+      if (mapped) {
+        m.public_url = mapped.public_url;
+        m.storage_path = mapped.storage_path;
+        if (mapped.poster_url) m.poster_url = mapped.poster_url;
+        dirty = true;
+      }
+    }
+  }
+
   const hasLegacyAbraka = parsed.media_assets?.some(
     (m) => m.id === 'prop-abraka-01' || m.public_url === '/media/property/abraka.jpg'
   );
   if (hasLegacyAbraka) {
-    const nonAbraka = parsed.media_assets.filter((m) => m.section_key !== 'abraka');
-    const freshAbraka = INITIAL_MEDIA_ASSETS.filter((m) => m.section_key === 'abraka');
+    const nonAbraka = parsed.media_assets.filter(
+      (m) => m.section_key !== 'abraka' && m.section_key !== 'exp_river_ethiope'
+    );
+    const freshAbraka = INITIAL_MEDIA_ASSETS.filter((m) => m.section_key === 'exp_river_ethiope');
     parsed.media_assets = [...nonAbraka, ...freshAbraka];
     dirty = true;
   }
@@ -729,12 +804,18 @@ export async function requestReservationCancellation(params: {
   bookingReference: string;
   guestEmail: string;
   reason: string;
+  refundAccountName?: string;
+  refundBankName?: string;
+  refundAccountNumber?: string;
 }): Promise<{
   reservation: Reservation;
   cancellation: CancellationRecord;
 }> {
   const now = new Date();
   const nowIso = now.toISOString();
+  const maskedAcct = params.refundAccountNumber
+    ? `••••${params.refundAccountNumber.slice(-4)}`
+    : null;
 
   if (isSupabaseConfigured()) {
     const sb = createSupabaseAdminClient()!;
@@ -765,6 +846,9 @@ export async function requestReservationCancellation(params: {
         reservation_id: reservation.id,
         cancelled_by_type: 'guest',
         reason: params.reason,
+        refund_account_name: params.refundAccountName || null,
+        refund_bank_name: params.refundBankName || null,
+        refund_account_number: params.refundAccountNumber || null,
         was_within_policy: true,
         is_exception_override: false,
         policy_deadline_at: reservation.cancellation_deadline_at,
@@ -791,7 +875,7 @@ export async function requestReservationCancellation(params: {
       channel: 'in_app',
       event_type: 'cancellation_requested',
       title: `Cancellation Request: ${reservation.booking_reference}`,
-      message: `Guest requested cancellation for ${reservation.booking_reference}. Reason: ${params.reason}`,
+      message: `Guest requested cancellation for ${reservation.booking_reference}. Reason: ${params.reason}${params.refundBankName ? ` · Refund Bank: ${params.refundBankName} (${maskedAcct})` : ''}`,
       related_reservation_id: reservation.id,
       delivery_status: 'sent',
     });
@@ -803,7 +887,12 @@ export async function requestReservationCancellation(params: {
       action: 'reservation.cancellation_requested',
       entity_type: 'reservation',
       entity_id: reservation.id,
-      details: { booking_reference: reservation.booking_reference, reason: params.reason },
+      details: {
+        booking_reference: reservation.booking_reference,
+        reason: params.reason,
+        refund_bank_name: params.refundBankName || null,
+        refund_account_suffix: maskedAcct,
+      },
     });
 
     return {
@@ -848,6 +937,9 @@ export async function requestReservationCancellation(params: {
       cancelled_by_type: 'guest',
       cancelled_by_staff_id: null,
       reason: params.reason,
+      refund_account_name: params.refundAccountName || null,
+      refund_bank_name: params.refundBankName || null,
+      refund_account_number: params.refundAccountNumber || null,
       was_within_policy: true,
       is_exception_override: false,
       policy_deadline_at: reservation.cancellation_deadline_at,
@@ -876,7 +968,7 @@ export async function requestReservationCancellation(params: {
       channel: 'in_app',
       event_type: 'cancellation_requested',
       title: `Cancellation Request: ${reservation.booking_reference}`,
-      message: `${guest.full_name} requested cancellation for ${reservation.booking_reference}. Reason: ${params.reason}`,
+      message: `${guest.full_name} requested cancellation for ${reservation.booking_reference}. Reason: ${params.reason}${params.refundBankName ? ` · Refund Bank: ${params.refundBankName} (${maskedAcct})` : ''}`,
       related_reservation_id: reservation.id,
       is_read: false,
       delivery_status: 'sent',
@@ -895,6 +987,8 @@ export async function requestReservationCancellation(params: {
         booking_reference: reservation.booking_reference,
         reason: params.reason,
         previous_status: previousStatus,
+        refund_bank_name: params.refundBankName || null,
+        refund_account_suffix: maskedAcct,
       },
       created_at: nowIso,
     });
@@ -2225,9 +2319,14 @@ export async function processRefundAdmin(params: {
   providerRefundReference?: string;
   failureReason?: string;
   notes?: string;
+  refundDate?: string;
   actor: { userId: string; staffId: string; email: string; role: RoleSlug };
 }): Promise<RefundRecord> {
   const nowIso = new Date().toISOString();
+  const parsedDate =
+    params.refundDate && !Number.isNaN(Date.parse(params.refundDate))
+      ? new Date(params.refundDate).toISOString()
+      : null;
 
   if (isSupabaseConfigured()) {
     const sb = createSupabaseAdminClient()!;
@@ -2244,6 +2343,7 @@ export async function processRefundAdmin(params: {
 
     const patch: Record<string, unknown> = {};
     if (params.notes) patch.notes = params.notes;
+    if (parsedDate) patch.refund_date = parsedDate;
     if (params.action === 'approve') {
       patch.request_status = 'approved';
       patch.approved_by_staff_id = params.actor.staffId;
@@ -2257,10 +2357,12 @@ export async function processRefundAdmin(params: {
       if (!params.providerRefundReference) {
         throw new Error('A provider or bank refund reference is required to complete a refund.');
       }
+      const settledIso = parsedDate || nowIso;
       patch.request_status = 'completed';
       patch.provider_refund_reference = params.providerRefundReference;
       patch.processed_by_staff_id = params.actor.staffId;
-      patch.completed_at = nowIso;
+      patch.refund_date = settledIso;
+      patch.completed_at = settledIso;
     } else if (params.action === 'fail') {
       patch.request_status = 'failed';
       patch.failure_reason = params.failureReason || 'Provider refund failed.';
@@ -2304,6 +2406,7 @@ export async function processRefundAdmin(params: {
     if (rf.request_status === 'completed') return rf; // Idempotent
 
     if (params.notes) rf.notes = params.notes;
+    if (parsedDate) rf.refund_date = parsedDate;
     if (params.action === 'approve') {
       rf.request_status = 'approved';
       rf.approved_by_staff_id = params.actor.staffId;
@@ -2317,10 +2420,12 @@ export async function processRefundAdmin(params: {
       if (!params.providerRefundReference) {
         throw new Error('A provider or bank refund reference is required to complete a refund.');
       }
+      const settledIso = parsedDate || nowIso;
       rf.request_status = 'completed';
       rf.provider_refund_reference = params.providerRefundReference;
       rf.processed_by_staff_id = params.actor.staffId;
-      rf.completed_at = nowIso;
+      rf.refund_date = settledIso;
+      rf.completed_at = settledIso;
 
       const res = db.reservations.find((r) => r.id === rf.reservation_id);
       if (res) {
@@ -2348,6 +2453,7 @@ export async function processRefundAdmin(params: {
       details: {
         request_status: rf.request_status,
         provider_refund_reference: rf.provider_refund_reference,
+        refund_date: rf.refund_date || null,
       },
       created_at: nowIso,
     });

@@ -28,7 +28,12 @@ function matchesGroup(asset: MediaAsset, group: FilterGroup): boolean {
   if (group === 'facilities') {
     return ['pool', 'rooftop', 'dining'].includes(asset.section_key);
   }
-  return asset.section_key === 'abraka';
+  return (
+    asset.section_key === 'abraka' ||
+    asset.section_key === 'exp_river_ethiope' ||
+    asset.section_key === 'exp_abraka_market' ||
+    asset.section_key === 'exp_abraka_top'
+  );
 }
 
 export function GalleryArchiveClient({ assets }: { assets: MediaAsset[] }) {
@@ -84,7 +89,7 @@ export function GalleryArchiveClient({ assets }: { assets: MediaAsset[] }) {
                 subtitle="Abraka Corridor"
                 assets={filtered}
                 aspectClass="aspect-[4/5]"
-                maxWidthClass="max-w-[460px]"
+                maxWidthClass="max-w-2xl"
               />
             </div>
           </div>

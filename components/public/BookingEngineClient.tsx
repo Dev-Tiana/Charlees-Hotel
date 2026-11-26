@@ -384,7 +384,10 @@ export function BookingEngineClient({
                     )}
                     onSelectIndex={setGalleryIndex}
                     portraitMode={selectedItem.category.slug === 'twin-room'}
-                    portraitCoverMode={selectedItem.category.slug === 'deluxe-room'}
+                    portraitCoverMode={
+                      selectedItem.category.slug === 'deluxe-room' ||
+                      selectedItem.category.slug === 'luxury-room'
+                    }
                   />
                 </div>
                 <div className="md:col-span-6 space-y-4">
@@ -396,7 +399,6 @@ export function BookingEngineClient({
                       {selectedItem.category.name}
                     </h3>
                     <p className="mt-1 font-mono-tabular text-sm text-[#171614]">
-                      {formatNaira(selectedItem.category.nightly_rate_ngn)} / night ·{' '}
                       {selectedItem.isAvailable
                         ? `${selectedItem.availableRoomsCount} open for these dates`
                         : 'Sold out for selected dates'}
@@ -505,15 +507,10 @@ export function BookingEngineClient({
                         </p>
                       </div>
 
-                      <div className="sm:text-right shrink-0 space-y-0.5">
-                        <p className="font-mono-tabular text-base font-semibold text-[#171614]">
-                          {formatNaira(item.category.nightly_rate_ngn)}
-                          <span className="text-xs font-sans font-normal text-[#6B6459]"> / night</span>
-                        </p>
-                        <p className="text-xs font-mono-tabular uppercase tracking-[0.14em] text-[#8C6822]">
-                          {formatNaira(item.estimatedTotalNgn)} total · {item.nights}{' '}
-                          {item.nights === 1 ? 'night' : 'nights'}
-                        </p>
+                      <div className="sm:text-right shrink-0">
+                        <span className="text-xs font-mono-tabular uppercase tracking-[0.14em] text-[#8C6822]">
+                          {isSelected ? 'Selected Room' : item.isAvailable ? 'Select Room' : 'Unavailable'}
+                        </span>
                       </div>
                     </button>
                   );

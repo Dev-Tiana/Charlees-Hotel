@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { AlertCircle, CheckCircle2, Clock, CreditCard, Search, XCircle } from 'lucide-react';
 import { formatLagosDateTime, formatNaira } from '@/lib/timezone';
 import { CopyReferenceButton } from '@/components/public/CopyReferenceButton';
+import { PaymentReceiptCard } from '@/components/public/PaymentReceiptCard';
 import {
   CancellationRecord,
   Guest,
@@ -65,6 +66,9 @@ export function ManageBookingClient({
   const [error, setError] = useState('');
 
   const [reason, setReason] = useState('');
+  const [refundAccountName, setRefundAccountName] = useState('');
+  const [refundBankName, setRefundBankName] = useState('');
+  const [refundAccountNumber, setRefundAccountNumber] = useState('');
   const [requestingCancel, setRequestingCancel] = useState(false);
   const [cancelFeedback, setCancelFeedback] = useState('');
   const [cancelError, setCancelError] = useState('');
@@ -135,6 +139,10 @@ export function ManageBookingClient({
   const handleRequestCancellation = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!data) return;
+    if (!/^\d{6,20}$/.test(refundAccountNumber.trim())) {
+      setCancelError('Please enter a valid numeric bank account number (6 to 20 digits).');
+      return;
+    }
     setRequestingCancel(true);
     setCancelFeedback('');
     setCancelError('');
@@ -147,6 +155,9 @@ export function ManageBookingClient({
           bookingReference: data.reservation.booking_reference,
           guestEmail: data.guest?.email || email,
           reason,
+          refundAccountName: refundAccountName.trim(),
+          refundBankName: refundBankName.trim(),
+          refundAccountNumber: refundAccountNumber.trim(),
         }),
       });
       const json = await res.json();
@@ -158,6 +169,9 @@ export function ManageBookingClient({
             'Your cancellation request has been submitted and is awaiting review by Charlees Hotel & Suites.'
         );
         setReason('');
+        setRefundAccountName('');
+        setRefundBankName('');
+        setRefundAccountNumber('');
         await performLookup(data.reservation.booking_reference, data.guest?.email || email);
       }
     } catch {
@@ -224,6 +238,11 @@ export function ManageBookingClient({
   };
 
   const latestPayment = data?.payments[0] || null;
+  const isConfirmedPaid = Boolean(
+    data &&
+      data.reservation.payment_status === 'paid' &&
+      latestPayment?.status === 'confirmed'
+  );
   const needsPaymentAction =
     data &&
     !['cancelled', 'checked_out', 'no_show'].includes(data.reservation.status) &&
@@ -232,7 +251,7 @@ export function ManageBookingClient({
 
   return (
     <div className="space-y-10">
-      <form onSubmit={handleSearch} className="border border-[#E6E1D8] bg-white p-6 sm:p-8">
+      <form onSubmit={handleSearch} className="no-print border border-[#E6E1D8] bg-white p-6 sm:p-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-end">
           <div className="md:col-span-5">
             <label
@@ -318,7 +337,7 @@ export function ManageBookingClient({
 
       {data ? (
         <div className="space-y-8">
-          <section className="border border-[#E6E1D8] bg-white p-6 sm:p-8 space-y-6">
+          <section className="no-print border border-[#E6E1D8] bg-white p-6 sm:p-8 space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#EFEAE0] pb-4">
               <div className="space-y-2">
                 <p className="text-xs uppercase tracking-[0.18em] text-[#8C6822]">
@@ -354,13 +373,10 @@ export function ManageBookingClient({
                 <dt className="text-xs text-[#6B6459]">Total &amp; Payment Status</dt>
                 <dd className="mt-1 font-mono-tabular text-[#171614]">
                   {formatNaira(data.reservation.total_amount_ngn)} (
-                  {data.reservation.payment_status.replace(/_/g, ' ')})
+                  {data.reservation.payment_status === 'pending_verification'
+                    ? 'Payment Pending Confirmation'
+                    : data.reservation.payment_status.replace(/_/g, ' ')})
                 </dd>
-                {latestPayment?.provider_reference || latestPayment?.bank_transfer_reference ? (
-                  <p className="text-[11px] font-mono-tabular text-[#5C574F] mt-0.5 break-all">
-                    Ref: {latestPayment.provider_reference || latestPayment.bank_transfer_reference}
-                  </p>
-                ) : null}
               </div>
               <div>
                 <dt className="text-xs text-[#6B6459]">Cancellation Window (WAT)</dt>
@@ -370,6 +386,45 @@ export function ManageBookingClient({
               </div>
             </dl>
           </section>
+
+          {/* Verified Payment Receipt — Shown ONLY when Paid & Confirmed */}
+          {isConfirmedPaid && latestPayment ? (
+            <PaymentReceiptCard
+              bookingReference={data.reservation.booking_reference}
+              paymentReference={
+                latestPayment.provider_reference ||
+                latestPayment.bank_transfer_reference ||
+                data.reservation.booking_reference
+              }
+              guestName={data.guest?.full_name || 'Charlees Guest'}
+              roomCategoryName={data.category?.name || 'Guest Room'}
+              roomNumber={data.physicalRoom?.room_number || null}
+              checkInDate={data.reservation.check_in_date}
+              checkOutDate={data.reservation.check_out_date}
+              nights={data.reservation.nights}
+              adults={data.reservation.adults}
+              childrenCount={data.reservation.children}
+              amountPaidNgn={latestPayment.amount_ngn || data.reservation.total_amount_ngn}
+              paymentMethodLabel={
+                latestPayment.method === 'online_paystack'
+                  ? 'Online Card Payment (Paystack)'
+                  : latestPayment.method === 'pos'
+                    ? 'POS / Front Desk Settlement'
+                    : latestPayment.method === 'cash'
+                      ? 'Front Desk Cash Settlement'
+                      : 'Bank Transfer (GT Bank)'
+              }
+              paymentDateIso={
+                latestPayment.verified_at ||
+                latestPayment.created_at ||
+                data.reservation.created_at
+              }
+            />
+          ) : data.reservation.payment_status === 'pending_verification' ? (
+            <div className="no-print border border-amber-200 bg-amber-50/75 p-4 text-xs text-amber-950 leading-relaxed">
+              <strong>Payment Pending Confirmation:</strong> Your bank transfer reservation is waiting for staff verification. A payment receipt becomes available automatically once settlement is confirmed.
+            </div>
+          ) : null}
 
           {/* Pending Payment Options */}
           {needsPaymentAction ? (
@@ -522,6 +577,12 @@ export function ManageBookingClient({
                   <p className="text-xs">
                     Awaiting review by Charlees Hotel &amp; Suites management before room release and any eligible refund processing.
                   </p>
+                  {data.cancellation?.refund_bank_name ? (
+                    <p className="text-xs font-mono-tabular text-amber-900">
+                      Refund account on file: {data.cancellation.refund_account_name} ·{' '}
+                      {data.cancellation.refund_bank_name} ({data.cancellation.refund_account_number})
+                    </p>
+                  ) : null}
                 </div>
               </div>
             ) : (
@@ -536,7 +597,7 @@ export function ManageBookingClient({
                 ) : null}
 
                 {data.cancellationPolicy.canRequestCancellation ? (
-                  <form onSubmit={handleRequestCancellation} className="space-y-4">
+                  <form onSubmit={handleRequestCancellation} className="space-y-5">
                     <p className="text-sm text-[#4A453E]">
                       Your booking is within the cancellation request window until{' '}
                       <span className="font-mono-tabular font-medium">
@@ -544,6 +605,68 @@ export function ManageBookingClient({
                       </span>{' '}
                       (West Africa Time). Requests are reviewed by our staff before final cancellation and refund processing.
                     </p>
+
+                    <div className="border border-[#E6E1D8] bg-[#FAF9F6] p-4 space-y-3">
+                      <p className="text-xs uppercase tracking-[0.16em] text-[#8C6822] font-medium">
+                        Guest Bank Details for Eligible Refund
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                          <label
+                            htmlFor="refund-account-name"
+                            className="block text-[11px] uppercase tracking-[0.14em] text-[#5C574F] mb-1"
+                          >
+                            Account Name
+                          </label>
+                          <input
+                            id="refund-account-name"
+                            type="text"
+                            required
+                            placeholder="Full account name"
+                            value={refundAccountName}
+                            onChange={(e) => setRefundAccountName(e.target.value)}
+                            className="w-full h-10 px-3 text-sm bg-white border border-[#D8D1C5] focus:outline-none focus:border-[#8C6822]"
+                          />
+                        </div>
+                        <div>
+                          <label
+                            htmlFor="refund-bank-name"
+                            className="block text-[11px] uppercase tracking-[0.14em] text-[#5C574F] mb-1"
+                          >
+                            Bank Name
+                          </label>
+                          <input
+                            id="refund-bank-name"
+                            type="text"
+                            required
+                            placeholder="e.g. GTBank / Access Bank"
+                            value={refundBankName}
+                            onChange={(e) => setRefundBankName(e.target.value)}
+                            className="w-full h-10 px-3 text-sm bg-white border border-[#D8D1C5] focus:outline-none focus:border-[#8C6822]"
+                          />
+                        </div>
+                        <div>
+                          <label
+                            htmlFor="refund-account-number"
+                            className="block text-[11px] uppercase tracking-[0.14em] text-[#5C574F] mb-1"
+                          >
+                            Account Number
+                          </label>
+                          <input
+                            id="refund-account-number"
+                            type="text"
+                            inputMode="numeric"
+                            pattern="\d{6,20}"
+                            required
+                            placeholder="10-digit NUBAN"
+                            value={refundAccountNumber}
+                            onChange={(e) => setRefundAccountNumber(e.target.value.replace(/\s+/g, ''))}
+                            className="w-full h-10 px-3 text-sm bg-white border border-[#D8D1C5] font-mono-tabular focus:outline-none focus:border-[#8C6822]"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
                     <div>
                       <label
                         htmlFor="cancel-reason"
@@ -557,7 +680,7 @@ export function ManageBookingClient({
                         required
                         value={reason}
                         onChange={(e) => setReason(e.target.value)}
-                        className="w-full p-3 text-sm bg-[#FAF9F6] border border-[#D8D1C5]"
+                        className="w-full p-3 text-sm bg-[#FAF9F6] border border-[#D8D1C5] focus:outline-none focus:border-[#8C6822]"
                       />
                     </div>
                     {cancelError ? (

@@ -37,8 +37,18 @@ export async function GET(req: NextRequest) {
       ['checked_in', 'checked_out', 'no_show'].includes(found.reservation.status) ||
       (statusAllowsRequest && !withinPolicyWindow);
 
+    const maskedCancellation = found.cancellation
+      ? {
+          ...found.cancellation,
+          refund_account_number: found.cancellation.refund_account_number
+            ? `••••${found.cancellation.refund_account_number.slice(-4)}`
+            : null,
+        }
+      : null;
+
     return NextResponse.json({
       ...found,
+      cancellation: maskedCancellation,
       bankDetails: {
         bankName: settings.hotel_profile.bankName,
         bankAccountName: settings.hotel_profile.bankAccountName,

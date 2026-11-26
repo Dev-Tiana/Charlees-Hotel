@@ -150,7 +150,7 @@ export function RoomMediaGallery({
   const isConstrainedPortrait = portraitMode || portraitCoverMode;
 
   const frameWrapperClass = isConstrainedPortrait
-    ? 'w-full max-w-[440px] mx-auto'
+    ? 'w-full max-w-xl mx-auto'
     : 'w-full';
 
   const stageAspectClass = portraitCoverMode
@@ -205,14 +205,12 @@ export function RoomMediaGallery({
                     muted
                     loop
                     playsInline
-                    preload="metadata"
+                    preload="none"
                     aria-label={activeAsset.alt_text || `${roomName} walkthrough video`}
                     onPlay={() => setIsPlaying(true)}
                     onPause={() => setIsPlaying(false)}
                     onClick={toggleVideoPlayback}
-                    className={`h-full w-full bg-[#0D0D0E] ${
-                      portraitCoverMode ? 'object-cover object-center' : 'object-contain'
-                    }`}
+                    className="h-full w-full bg-[#0D0D0E] object-cover object-center"
                   />
 
                   <button
@@ -246,16 +244,11 @@ export function RoomMediaGallery({
                   src={activeAsset.public_url}
                   alt={activeAsset.alt_text || activeAsset.title || roomName}
                   fill
+                  loading="lazy"
                   draggable={false}
                   referrerPolicy="no-referrer"
-                  sizes={isConstrainedPortrait ? '(max-width: 1024px) 100vw, 440px' : '(max-width: 1024px) 100vw, 58vw'}
-                  className={
-                    portraitCoverMode
-                      ? 'object-cover object-center'
-                      : portraitMode
-                        ? 'object-contain bg-[#F2EFE9]'
-                        : 'object-cover'
-                  }
+                  sizes={isConstrainedPortrait ? '(max-width: 1024px) 100vw, 576px' : '(max-width: 1024px) 100vw, 62vw'}
+                  className="object-cover object-center"
                 />
               )}
             </motion.div>
@@ -350,73 +343,6 @@ export function RoomMediaGallery({
                       : 'w-1.5 bg-[#C8C0B2] hover:bg-[#8C6822]'
                   }`}
                 />
-              </button>
-            );
-          })}
-        </div>
-      ) : null}
-
-      {/* Thumbnail Strip (Video Poster First, Followed by Room Photographs) */}
-      {assets.length > 1 ? (
-        <div
-          className={`mt-3 grid gap-2 ${
-            portraitCoverMode
-              ? 'grid-cols-5 sm:grid-cols-10'
-              : portraitMode
-                ? 'grid-cols-5 sm:grid-cols-9'
-                : 'grid-cols-4 sm:grid-cols-6'
-          }`}
-        >
-          {assets.map((asset, assetIdx) => {
-            const isActive = assetIdx === safeIndex;
-            return (
-              <button
-                key={asset.id}
-                type="button"
-                onClick={() => goToIndex(assetIdx)}
-                aria-label={
-                  asset.media_type === 'video'
-                    ? `Select ${roomName} video tour`
-                    : `Select ${roomName} photograph ${assetIdx + 1}`
-                }
-                className={`relative overflow-hidden border transition-all ${
-                  portraitCoverMode
-                    ? 'aspect-[3/4]'
-                    : portraitMode
-                      ? 'aspect-[4/5]'
-                      : 'aspect-[4/3]'
-                } ${
-                  isActive
-                    ? 'border-[#0D0D0E] ring-1 ring-[#0D0D0E]'
-                    : 'border-[#D8D1C5] opacity-70 hover:opacity-100'
-                }`}
-              >
-                {asset.media_type === 'video' ? (
-                  <div className="relative h-full w-full bg-[#0D0D0E]">
-                    {asset.poster_url ? (
-                      <Image
-                        src={asset.poster_url}
-                        alt={asset.alt_text || `${roomName} video preview`}
-                        fill
-                        referrerPolicy="no-referrer"
-                        sizes="96px"
-                        className="object-cover opacity-80"
-                      />
-                    ) : null}
-                    <span className="absolute inset-0 flex items-center justify-center bg-[#0D0D0E]/35 text-[#FAF9F6]">
-                      <Play className="w-4 h-4 fill-current" aria-hidden="true" />
-                    </span>
-                  </div>
-                ) : (
-                  <Image
-                    src={asset.public_url}
-                    alt={asset.alt_text || `${roomName} thumbnail ${assetIdx + 1}`}
-                    fill
-                    referrerPolicy="no-referrer"
-                    sizes="96px"
-                    className="object-cover"
-                  />
-                )}
               </button>
             );
           })}

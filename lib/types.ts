@@ -134,6 +134,9 @@ export interface CancellationRecord {
   cancelled_by_type: 'guest' | 'staff';
   cancelled_by_staff_id: string | null;
   reason: string;
+  refund_account_name?: string | null;
+  refund_bank_name?: string | null;
+  refund_account_number?: string | null;
   was_within_policy: boolean;
   is_exception_override: boolean;
   policy_deadline_at: string;
@@ -160,6 +163,7 @@ export interface RefundRecord {
   approved_by_staff_id: string | null;
   processed_by_staff_id: string | null;
   requested_at: string;
+  refund_date?: string | null;
   completed_at: string | null;
   notes: string;
 }
@@ -208,6 +212,9 @@ export interface MediaAsset {
     | 'rooftop'
     | 'dining'
     | 'abraka'
+    | 'exp_river_ethiope'
+    | 'exp_abraka_market'
+    | 'exp_abraka_top'
     | 'gallery';
   category_slug: string | null;
   storage_path: string;

@@ -20,7 +20,7 @@ export function RooftopVideoPlayer({
   asset,
   title = 'The Rooftop Lounge',
   tone = 'dark',
-  maxWidthClass = 'max-w-[390px]',
+  maxWidthClass = 'max-w-lg',
 }: RooftopVideoPlayerProps) {
   const isDark = tone === 'dark';
   const shouldReduce = useReducedMotion();
@@ -88,7 +88,8 @@ export function RooftopVideoPlayer({
           src={posterSrc}
           alt={altText}
           fill
-          sizes="(max-width: 768px) 100vw, 390px"
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, 512px"
           referrerPolicy="no-referrer"
           className="object-cover object-center pointer-events-none select-none"
         />
@@ -101,7 +102,7 @@ export function RooftopVideoPlayer({
           muted={isMuted}
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           aria-label={altText}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
